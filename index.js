@@ -16,9 +16,11 @@ import {
 } from "react-redux";
 import "./css/base.css";
 import User from "./app/component/user.jsx";
+import Renter from "./app/component/enter.jsx";
 
 var element = (
-	<Provider store={store}>
-	    <User />
-	</Provider>);
+	<div>
+	<Renter />
+	</div>
+);
 ReactDOM.render(element, document.getElementById("demo"));

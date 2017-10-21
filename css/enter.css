@@ -1,0 +1,45 @@
+/**	
+ * 入口 样式
+ * by lfp
+ */
+.enter_hd{
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #fafafa;
+}
+.enter_hd .enter_bg{
+    height: 3rem;
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    position: absolute;
+    left: 1.222rem;
+    top: 3%;	
+    background: url(../img/bg/bg.jpg) no-repeat;	
+}
+.enter_hd .enter_box{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 28%;
+}
+.enter_hd .enter_box a{
+	font-family: "宋体";
+	font-size: 0.6rem;
+    display: block;
+    color: #f8f8f8;
+    width: 100%;
+    height: 2.444rem;
+    line-height: 2.444rem;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #888;
+    margin: 0 0.2rem;
+    border-radius: 0.1rem;
+    background: #fe524e;
+    box-shadow: 0.1rem 0.1rem rgba(0,0,0,0.3);	
+}

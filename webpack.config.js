@@ -19,7 +19,7 @@ module.exports = {
 			test: /\.html$/,
 			loader: "html-loader"
 		}, {
-			test: /\.jpg|png|gif|jpeg$/,
+			test: /\.jpg|png|gif|jpeg|bmp$/,
 			loader: "url-loader"
 		}, {
 			test: /\.js[x]?$/,
