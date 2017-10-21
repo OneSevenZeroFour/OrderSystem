@@ -1,0 +1,53 @@
+/* 
+* @Author: Marte
+* @Date:   2017-10-21 11:55:15
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-10-21 12:02:12
+*/
+*{
+    padding: 0;
+    margin: 0;
+}
+body,html{
+    width: 100%;
+    height: 100%;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+img{
+    border:none;
+}
+
+@media (min-width:1300px)
+{
+    body, html
+    {
+        font-size: 130px;
+    }
+}
+@media (min-width:900px) and (max-width:1299px)
+{
+    body, html
+    {
+        font-size: 100px;
+        /*以ipad为基准*/
+    }
+}
+@media (min-width:500px) and (max-width:899px)
+{
+    body, html
+    {
+        font-size: 70px;
+    }
+}
+@media (max-width:499px)
+{
+    body, html
+    {
+        font-size: 40px;
+    }
+}

@@ -1,7 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import "./css/base.css";
+
+import User from "./app/component/user.jsx";
+
 ReactDOM.render(
-    <div></div>
-    ,document.getElementById("#demo")
+    <div>
+        <User />
+    </div>
+    ,document.getElementById("demo")
 );
