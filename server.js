@@ -23,7 +23,17 @@ app.get("/submenu", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	res.send("its ok")
 });
-
+//查询座子的状态
+app.get("/desk", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	connection.query(`select * from desk`, function(err, results, file) {
+		if (err) throw err;
+		console.log(results);
+		res.send(JSON.stringify({
+			results
+		}));
+	})
+});
 
 console.log("Server Is Start!!!");
 app.listen(10002);
