@@ -4,6 +4,8 @@
  * Prop 子组件只能通过 props 来传递数据
  * 默认props的getDefaultProps()方法
  */
+import "./app/component/kitchen/kitchen.scss";
+import Kitchen from "./app/component/kitchen/kitchen.jsx";
 import React, {
 	findDOMNode,
 	Component,
@@ -19,8 +21,11 @@ import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
 
 var element = (
-	<div>
-	<Renter />
-	</div>
+	<Provider store={store}>
+		<div className="ele">
+			{/* <Renter /> */}
+			<Kitchen />
+		</div>
+	</Provider>
 );
 ReactDOM.render(element, document.getElementById("demo"));

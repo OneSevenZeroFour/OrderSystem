@@ -15,7 +15,13 @@ module.exports = {
 			test: /\.css$/,
 			exclude: /(node_modules)/,
 			loader: "style-loader!css-loader"
-		}, {
+		},
+		{
+			test: /\.scss$/,
+			exclude: /(node_modules)/,
+			loader: "style-loader!css-loader!sass-loader"
+		},
+		 {
 			test: /\.html$/,
 			loader: "html-loader"
 		}, {
