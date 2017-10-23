@@ -1,5 +1,10 @@
 import React from "react";
 import "../../css/enter.css";
+import {
+	HashRouter,
+	Route,
+	Link
+} from 'react-router-dom';
 
 export default class Renter extends React.Component{
 	constructor(props){
@@ -50,8 +55,8 @@ export default class Renter extends React.Component{
 				<div className="enter_bg"></div>
 				<div className="enter_box">
 					<a href="javascript:;" onClick={this.popmenu}>客人入口</a>
-					<a href="javascript:;">服务入口</a>
-					<a href="javascript:;">后厨入口</a>
+					<a href="#/desk">服务入口</a>
+					<a href="#/kitchen">后厨入口</a>
 				</div>
 				<div className="enter_desk" ref="pops">
 					<ul>
@@ -60,7 +65,7 @@ export default class Renter extends React.Component{
 							this.state.desk_box.map(function(item,idx){
 								var n = idx+1;
 		        				return <li key={item}>
-		        						<a href="#/user" data-desker={n} onClick={this.write_desk_num}>{item}</a>
+		        						<Link to="/user" data-desker={n} onClick={this.write_desk_num}>{item}</Link>
 		        						</li>;
 		        			}.bind(this))
 						}

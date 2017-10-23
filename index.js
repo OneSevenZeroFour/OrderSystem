@@ -23,7 +23,7 @@ import {
 	HashRouter,
 	Route,
 	Link
-} from 'react-router-dom'
+} from 'react-router-dom';
 import $ from "jquery";
 window.$ = $;
 
@@ -37,7 +37,7 @@ var element = (
 	<Provider store={store}>
 	<div>
 		// <Route path="*" component={Renter} />
-		<Route exact path="/" component={Renter} />
+		<Route path="/" component={Renter} />
 	</div>
 	</Provider>
 	</HashRouter>

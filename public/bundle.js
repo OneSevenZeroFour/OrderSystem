@@ -2432,7 +2432,7 @@ var element = _react2.default.createElement(
 			null,
 			"// ",
 			_react2.default.createElement(_reactRouterDom.Route, { path: "*", component: _enter2.default }),
-			_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/", component: _enter2.default })
+			_react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _enter2.default })
 		)
 	)
 );
@@ -24163,6 +24163,8 @@ var _react2 = _interopRequireDefault(_react);
 
 __webpack_require__(79);
 
+var _reactRouterDom = __webpack_require__(117);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24240,12 +24242,12 @@ var Renter = function (_React$Component) {
 					),
 					_react2.default.createElement(
 						"a",
-						{ href: "javascript:;" },
+						{ href: "#/desk" },
 						"\u670D\u52A1\u5165\u53E3"
 					),
 					_react2.default.createElement(
 						"a",
-						{ href: "javascript:;" },
+						{ href: "#/kitchen" },
 						"\u540E\u53A8\u5165\u53E3"
 					)
 				),
@@ -24266,8 +24268,8 @@ var Renter = function (_React$Component) {
 								"li",
 								{ key: item },
 								_react2.default.createElement(
-									"a",
-									{ href: "#/user", "data-desker": n, onClick: this.write_desk_num },
+									_reactRouterDom.Link,
+									{ to: "/user", "data-desker": n, onClick: this.write_desk_num },
 									item
 								)
 							);
@@ -24323,7 +24325,7 @@ exports = module.exports = __webpack_require__(28)(undefined);
 
 
 // module
-exports.push([module.i, "/** \r\n * 入口 样式\r\n * by lfp\r\n */\r\n.enter_hd{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    background: -webkit-gradient(linear, left top, right top, from(#fafafa), to(#f6f6f6));\r\n    background: linear-gradient(90deg, #fafafa, #f6f6f6);\r\n    overflow: hidden;\r\n}\r\n.enter_hd .enter_bg{\r\n    height: 2rem;\r\n    margin: 0 auto;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: absolute;\r\n    left: 1.222rem;\r\n    top: 3%;    \r\n    background: url(" + __webpack_require__(81) + ") no-repeat;    \r\n}\r\n.enter_hd .enter_box{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: absolute;\r\n    left: 0;\r\n    top: 3.222rem;\r\n}\r\n.enter_hd .enter_box a{\r\n    font-family: \"\\5B8B\\4F53\";\r\n    font-size: 0.4666rem;\r\n    display: block;\r\n    color: #fafafa;\r\n    width: 29%;\r\n    height: 2rem;\r\n    line-height: 2rem;\r\n    text-align: center;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n    border: 1px solid #888;\r\n    margin: 0 0.2rem;\r\n    border-radius: 0.1rem;\r\n    background: #333;\r\n    -webkit-box-shadow: 0.1rem 0.1rem rgba(0,0,0,0.3);\r\n    box-shadow: 0.1rem 0.1rem rgba(0,0,0,0.3);\r\n}\r\n.enter_hd .enter_desk{\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    bottom: 0;\r\n    background: rgba(0,0,0,0.3);\r\n    z-index: 999;  \r\n    display: none;  \r\n    transition: 0.5s 0.1s linear;\r\n}\r\n.enter_hd .enter_desk ul button{\r\n    width: 0.688rem;\r\n    height: 0.488rem;   \r\n    font-size: 0.444rem;\r\n    background: rgba(0,0,0,0.1);\r\n    border: 0 none;\r\n    color: #fff;\r\n    position: absolute;\r\n    right: 0;\r\n    top: 0;\r\n    z-index: 1001;\r\n}\r\n.enter_hd .enter_desk ul{\r\n    background: #fe524e;\r\n    width: 5rem;\r\n    height: 4rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    margin: auto;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: start;\r\n        -ms-flex-pack: start;\r\n            justify-content: start;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n        -ms-flex-flow: column nowrap;\r\n            flex-flow: column nowrap;\r\n    overflow-x: hidden;\r\n    overflow-y: scroll;\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\r\n    padding: 0 1.211rem;\r\n    z-index: 1000;\r\n    -webkit-overflow-scrolling: touch;   \r\n    transition: 0.5s 0.1s linear;     \r\n}\r\n.enter_hd .enter_desk ul li{\r\n    text-align: center;\r\n    border-bottom: 1px solid #f1f1f1;\r\n}\r\n.enter_hd .enter_desk ul li:nth-last-child(1){\r\n    border-bottom: 0 none;\r\n}\r\n.enter_hd .enter_desk ul li a{\r\n    font-size: 0.2rem;\r\n    color: #fff;\r\n    display: block;\r\n    width: 100%;\r\n    padding: 0.111rem 0;\r\n}", ""]);
+exports.push([module.i, "/** \r\n * 入口 样式\r\n * by lfp\r\n */\r\n.enter_hd{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    bottom: 0;\r\n    right: 0;\r\n    background: -webkit-gradient(linear, left top, right top, from(#fafafa), to(#f6f6f6));\r\n    background: linear-gradient(90deg, #fafafa, #f6f6f6);\r\n    overflow: hidden;\r\n}\r\n.enter_hd .enter_bg{\r\n    height: 2rem;\r\n    margin: 0 auto;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: absolute;\r\n    left: 1.222rem;\r\n    top: 3%;    \r\n    background: url(" + __webpack_require__(81) + ") no-repeat;    \r\n}\r\n.enter_hd .enter_box{\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    width: 100%;\r\n    position: absolute;\r\n    left: 0;\r\n    top: 3.222rem;\r\n}\r\n.enter_hd .enter_box a{\r\n    font-family: \"\\5B8B\\4F53\";\r\n    font-size: 0.4666rem;\r\n    display: block;\r\n    color: #fafafa;\r\n    width: 29%;\r\n    height: 2rem;\r\n    line-height: 2rem;\r\n    text-align: center;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n    border: 1px solid #888;\r\n    margin: 0 0.2rem;\r\n    border-radius: 0.1rem;\r\n    background: #333;\r\n    -webkit-box-shadow: 0.1rem 0.1rem rgba(0,0,0,0.3);\r\n    box-shadow: 0.1rem 0.1rem rgba(0,0,0,0.3);\r\n}\r\n.enter_hd .enter_box a:hover{\r\n    transition: 0.3s linear;\r\n    background: #fe524e;\r\n}\r\n.enter_hd .enter_desk{\r\n    position: absolute;\r\n    left: 0;\r\n    right: 0;\r\n    top: 0;\r\n    bottom: 0;\r\n    background: rgba(0,0,0,0.3);\r\n    z-index: 999;  \r\n    display: none;  \r\n    transition: 0.5s 0.1s linear;\r\n}\r\n.enter_hd .enter_desk ul button{\r\n    width: 0.688rem;\r\n    height: 0.488rem;   \r\n    font-size: 0.444rem;\r\n    background: rgba(0,0,0,0.1);\r\n    border: 0 none;\r\n    color: #fff;\r\n    position: absolute;\r\n    right: 0;\r\n    top: 0;\r\n    z-index: 1001;\r\n}\r\n.enter_hd .enter_desk ul{\r\n    background: #fe524e;\r\n    width: 5rem;\r\n    height: 4rem;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    margin: auto;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-pack: start;\r\n    -ms-flex-pack: start;\r\n    justify-content: start;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    -ms-flex-flow: column nowrap;\r\n    flex-flow: column nowrap;\r\n    overflow-x: hidden;\r\n    overflow-y: scroll;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\r\n    padding: 0 1.211rem;\r\n    z-index: 1000;\r\n    -webkit-overflow-scrolling: touch;   \r\n    transition: 0.5s 0.1s linear;     \r\n}\r\n.enter_hd .enter_desk ul li{\r\n    text-align: center;\r\n    border-bottom: 1px solid #f1f1f1;\r\n}\r\n.enter_hd .enter_desk ul li:nth-last-child(1){\r\n    border-bottom: 0 none;\r\n}\r\n.enter_hd .enter_desk ul li a{\r\n    font-size: 0.2rem;\r\n    color: #fff;\r\n    display: block;\r\n    width: 100%;\r\n    padding: 0.111rem 0;\r\n}", ""]);
 
 // exports
 
