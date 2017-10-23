@@ -36,7 +36,7 @@ var element = (
 	<HashRouter>
 	<Provider store={store}>
 	<div>
-		// <Route path="*" component={Renter} />
+		<Route path="*" component={Renter} />
 		<Route path="/" component={Renter} />
 	</div>
 	</Provider>

@@ -2430,7 +2430,6 @@ var element = _react2.default.createElement(
 		_react2.default.createElement(
 			"div",
 			null,
-			"// ",
 			_react2.default.createElement(_reactRouterDom.Route, { path: "*", component: _enter2.default }),
 			_react2.default.createElement(_reactRouterDom.Route, { path: "/", component: _enter2.default })
 		)
