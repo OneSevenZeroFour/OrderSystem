@@ -14,6 +14,7 @@ import store from "./store.js";
 import {
 	Provider
 } from "react-redux";
+import io from "socket.io-client";
 // import {
 // 	Router,
 // 	Route,
@@ -27,11 +28,18 @@ import {
 import $ from "jquery";
 window.$ = $;
 
-
 import "./css/base.css";
 import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
 
+var socket = io("http://localhost:10002");
+
+function test() {
+	socket.emit("test", {
+		testing: "socket success！！！"
+	})
+}
+test();
 var element = (
 	<HashRouter>
 	<Provider store={store}>
