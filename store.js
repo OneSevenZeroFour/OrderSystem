@@ -1,10 +1,14 @@
 import {
 	createStore
 } from "redux";
-let store = createStore((state, action) => {
+let store = createStore((state = {
+	kitchen: []
+}, action) => {
 	switch (action.type) {
-		case "test":
-			return {}
+		case "KITCHEN":
+			return {
+				store: action.store
+			}
 			break;
 		case "txt":
 			return {}

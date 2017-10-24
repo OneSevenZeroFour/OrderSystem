@@ -2,7 +2,7 @@
  * @Author: lzh 
  * @Date: 2017-10-23 10:09:10 
  * @Last Modified by: lzh
- * @Last Modified time: 2017-10-23 12:16:59
+ * @Last Modified time: 2017-10-24 21:09:52
  */
 /*
  + 背景色: #eeeeee
@@ -23,9 +23,12 @@
      flex-direction: column;
      header{
          height: .84rem;
+         position: relative;
+         z-index: 10;
          background-color: $theme_color;
          text-align: center;
          line-height: .84rem;
+         box-shadow: 0 2px 2px 0px #ccc;
         h1{
             color: #fff;
             font-size: .30rem;
@@ -53,7 +56,7 @@
 }
 
 .tablelist{
-    font-size: .18rem;
+    font-size: .2rem;
     .tableItem{
         height: 1rem;
         text-align: center;
@@ -104,6 +107,7 @@
             padding: .15rem 0 .15rem .15rem;
             margin-right: .25rem;
             img{
+                border-radius: 5px;
                 display: block;
                 height: .84rem;
                 width: .84rem;
