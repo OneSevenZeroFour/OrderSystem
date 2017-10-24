@@ -29,10 +29,15 @@ io.sockets.on("connection", function(socket) {
 		console.log('guest', guest_id);
 	}).on("send_order_id_toback", function(data) {
 		//接收订单号与桌子号
+	}).on("callServer", function(data) {
+		//呼叫服务员
+		console.log("from desk ", data);
+	}).on("callToPay", function(data) {
+		//呼叫服务员
+		console.log("pay from desk ", data);
 	});
-	socket.on("test", function(data) {
-		console.log(data);
-	})
+	io.emit("get_order_state", "send get");
+
 })
 
 var guest_id = [],
@@ -61,6 +66,14 @@ app.post('/getMenu', function(req, res) {
 	connection.query(`insert into userOrder (desk,content,sum,orderTime) values ("${arg.desk}","${encodeURI(arg.txt)}",${arg.pay},"${arg.time}")`, function(err, ress, field) {
 		if (err) throw err;
 		res.send(JSON.stringify(ress.insertId));
+	});
+}).post('/getOrderlist', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body.id;
+	console.log("get order by id", arg);
+	connection.query(`SELECT * from userOrder where id=${arg}`, function(err, ress, field) {
+		if (err) throw err;
+		res.send(ress[0]);
 	});
 
 });

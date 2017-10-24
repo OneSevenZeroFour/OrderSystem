@@ -1,7 +1,8 @@
 
 import React from "react";
 import '../../css/user.css';
-import '../../css/footer.css';
+import UFooter from './ufooter.jsx';
+import {connect} from "react-redux";
 import io from "socket.io-client";
 var socket = io("http://10.3.132.65:10002");
 
@@ -16,44 +17,10 @@ class User extends React.Component{
             sum:[],
             onWhich:0,
             showOrder:false,
-            list:[
-                {
-                    title:"菜单",
-                    herfs:"javascript:;",
-                    clas:"icon-shop_fill"
-                },{
-                    title:"服务铃",
-                    herfs:"javascript:;",
-                    clas:"icon-remind_fill"
-                },{
-                    title:"我的订单",
-                    herfs:"javascript:;",
-                    clas:"icon-activity_fill"
-                },{
-                    title:"呼叫结账",
-                    herfs:"javascript:;",
-                    clas:"icon-financial_fill"
-                }
-            ],
-            bg_num:0,
-            desk:window.localStorage.getItem("desk_num")?window.localStorage.getItem("desk_num"):1
+            showOrderEnter:true,
+            desk:this.props.desk,
+            order_id:false
         },
-        // this.change_bg = (event)=>{
-        //     var idx = event.target.dataset.idx;
-        //     console.log(idx)
-        //     if(!(idx==2&&this.state.pay<=0)){
-        //         this.setState(Object.assign({},this.state,{
-        //             bg_num:idx
-        //         }));
-        //         console.log(this.state.bg_num,idx)
-        //     }
-        //     if(idx==1){
-        //         this.callServer()
-        //     };
-        //     if(idx==2){
-        //         this.sureOrder()
-        //     };
-        // },
         this.changeList = (e)=>{
             this.setState(Object.assign({},this.state,{
                 onWhich:$(e.target).closest('li').index()
@@ -63,7 +30,7 @@ class User extends React.Component{
         this.getList = (arg)=>{
             var self = this;
             $.ajax({
-                url: 'http://10.3.132.65:10002/getMenu',
+                url: 'http://localhost:10002/getMenu',
                 type: 'POST',
                 data: {type: arg}
             }).done(function(data) {
@@ -76,7 +43,7 @@ class User extends React.Component{
             console.log('getType');
             var self = this;
             $.ajax({
-                url: 'http://10.3.132.65:10002/getType',
+                url: 'http://localhost:10002/getType',
                 type: 'POST',
                 success:function(data){
                     data = JSON.parse(data);
@@ -153,11 +120,7 @@ class User extends React.Component{
             }
             // console.log(this.state.txt);
         }
-        this.callServer = (e) => {
-            //呼叫服务员
-            console.log('callServer');
-        }
-
+        
         this.sureOrder = () => {
             if(this.state.pay*1>0)
                 this.setState(Object.assign({},this.state,{
@@ -206,7 +169,12 @@ class User extends React.Component{
                 success:function(data){
                     console.log('id',data);
                     // 不能再点
-                    
+                    self.setState(Object.assign({},self.state,{
+                        showOrderEnter:false,
+                        showOrder:false,
+                        order_id:data
+                    }));
+                    self.props.dispatch({type:"setOrderId",oid:data,hasorder:true});
                     //发送socket
                     var send_obj = {id:data,desk:self.state.desk};
                     socket.emit('send_order_id_toback',send_obj);
@@ -220,41 +188,41 @@ class User extends React.Component{
     render(){
         var self = this;
         return (
-            <div className='user'>              
-                <div className="top">
-                    <ul className="type">
-                        {this.state.types.map(function(item,index){
-                            return <li className={index==self.state.onWhich?"on":"li"} key={index}><p onClick={self.changeList}>{item.name}</p>
-                                {self.state.sum[index]?<span>{self.state.sum[index]}</span>:""}
-                            </li>;
+            <div className='user'>
+                {   this.state.showOrder?
+                    <div className="order1">
+                        <span className="close" onClick={this.closeFun}>&times;</span>
+                        {this.state.txt.map(function(item,idx){
+                            return item?item.map(function(im,ix){
+                                return im?
+                                    <div className="li" key={'li'+ix}>
+                                    <img src={im.img} />
+                                    <div className="txt">
+                                        <p className="name">{im.name}</p>
+                                        <p className="price">￥<span>{im.price}</span> &times; {im.num}</p>
+                                    </div>
+                                </div>
+                                :""
+                            }):""
+                           
                         })}
-                    </ul>
-                    
-                   {   this.state.showOrder?
-                    <div className="order_shell">
-                        <div className="order_laying"></div>
-                       <div className="order">
-                           <span className="close" onClick={this.closeFun}>&times;</span>
-                           {this.state.txt.map(function(item,idx){
-                               return item?item.map(function(im,ix){
-                                   return im?
-                                       <div className="li" key={'li'+ix}>
-                                       <img src={im.img} />
-                                       <div className="txt">
-                                           <p className="name">{im.name}</p>
-                                           <p className="price">￥<span>{im.price}</span> &times; {im.num}</p>
-                                       </div>
-                                   </div>
-                                   :""
-                               }):""
-                              
-                           })}
-                           <a href="javascript:;" onClick={this.orderFun} className="send_btn">确认下单</a>
-                       </div>
-                       </div>
-                       :
-                       <div className='menu' index={this.state.onWhich}>
-                           {this.state.menus.map(function(item,idx){
+                        <div className="sum_box">
+                            <span className="sum">总价：￥{this.state.pay}</span>
+                            <a href="javascript:;" onClick={this.orderFun} className="send_btn">确认下单</a>
+                        </div>
+                    </div>
+                    :
+                    <div className="top">
+                        <ul className="type">
+                            {this.state.types.map(function(item,index){
+                                return <li className={index==self.state.onWhich?"on":"li"} key={index}><p onClick={self.changeList}>{item.name}</p>
+                                    {self.state.sum[index]?<span>{self.state.sum[index]}</span>:""}
+                                </li>;
+                            })}
+                            {this.state.showOrderEnter?<li className="li" onClick={this.sureOrder}>下单入口</li>:""}
+                        </ul>
+                        <div className='menu' index={this.state.onWhich}>
+                            {this.state.menus.map(function(item,idx){
                                var type_idx = self.state.onWhich;
                                var bool = self.state.txt[type_idx]&&self.state.txt[type_idx][idx];
                                return <div className="food" key={item.id} index={idx}>
@@ -270,21 +238,12 @@ class User extends React.Component{
                                            </p>
                                        </div>
                                    </div>
-                           })}
-                       </div> }
-                </div>
+                               })}
+                           </div>
+                    </div>   
+                }               
 
-                <footer>
-                    <ul className="foot_menu">
-                    {
-                        this.state.list.map(function(item,idx){
-                            return <li key={idx}>
-                                    <a href={item.herfs} data-idx={idx} onClick={this.change_bg} className={this.state.bg_num == idx?"active_bg":""}><i className={'iconfont '+item.clas}></i>{item.title}</a>
-                                </li>
-                            }.bind(this))
-                        }
-                    </ul>
-                </footer>   
+                <UFooter /> 
             </div>
             )
     }
@@ -293,25 +252,9 @@ class User extends React.Component{
         this.getType();
         socket.emit('send_desk_id_toback',this.state.desk);
     }
-    componentDidUpdate(){
-        this.change_bg = (event)=>{
-            var idx = event.target.dataset.idx;
-            console.log(idx)
-            // if(!(idx==2&&this.state.pay<=0)){
-                this.setState(Object.assign({},this.state,{
-                    bg_num:idx
-                }));
-                console.log(this.state.bg_num,idx)
-            // }
-            if(idx==1){
-                this.callServer()
-            };
-            if(idx==2){
-                this.sureOrder()
-            };
-        }      
-    }
 }
 
 
-export default User;
+export default connect((state)=>{
+    return state;//一定要return才能在当前组件拿到store
+})(User);

@@ -201,7 +201,7 @@
     background: rgba(0,0,0,0.3);
     z-index: 90;    
 }
-.order{
+.order1{
     height: 97%;
     position: relative;
     -webkit-box-flex: 1;
@@ -213,11 +213,11 @@
     background: #fafafa;
     z-index: 999;
 }
-.order::-webkit-scrollbar{
+.order1::-webkit-scrollbar{
         width: 0;
         height: 0;
 }
-.order .close{
+.order1 .close{
     display: block;
     position: fixed;
     top: 0.1rem;
@@ -228,7 +228,7 @@
     line-height: 1em;
     z-index: 99;
 }
-.order .li{
+.order1 .li{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -240,13 +240,13 @@
             box-sizing:border-box;
 }
 
-.order .li img{
+.order1 .li img{
     display:block;
     width: 1rem;
     height: 1rem;
     margin: 0.08rem;
 }
-.order .txt{
+.order1 .txt{
     -webkit-box-flex:1;
         -ms-flex:1;
             flex:1;
@@ -258,16 +258,32 @@
         -ms-flex-direction: column;
             flex-direction: column;
 }
-.order .send_btn{
+.order1 .sum_box{
+    position: fixed;
+    box-sizing: border-box;
+    height: 0.66rem;
+    width: 100%;
+    bottom: 1.88rem;
+    left: 0;   
+    background: rgba(0,0,0,0.3);     
+}
+.order1 .sum_box span{
+    color: #f33;
+    position: absolute;
+    right: 2rem;
+    top: 0.12rem;
+    font-size: 0.288rem;
+}
+.order1 .sum_box .send_btn{
     display: block;
     font-size: 0.222rem;
-    position: fixed;
+    position: absolute;
     right: 0.22rem;
-    bottom: 2.22rem;
+    bottom: 0.08rem;
     padding: 0.11rem 0.22rem;
     border-radius: 0.04rem;
     -webkit-box-shadow: 0.04rem 0.04rem #666;
-            box-shadow: 0.04rem 0.04rem #666;
+    box-shadow: 0.04rem 0.04rem #666;
     color: #fff;
     background-color: #d9534f;
     border-color: #d43f3a;

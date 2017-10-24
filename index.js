@@ -31,6 +31,7 @@ window.$ = $;
 import "./css/base.css";
 import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
+import Myorder from "./app/component/myorder.jsx";
 
 var socket = io("http://10.3.132.65:10002");
 
@@ -45,7 +46,8 @@ var element = (
 	<Provider store={store}>
 	<div className="ele">
 		<Route exact path="/" component={Renter} />
-		 <Route exact path="/user" component={User}></Route>
+		 <Route exact path="/user" component={User} />
+		 <Route exact path="/myorder" component={Myorder} />
 	</div>
 	</Provider>
 	</HashRouter>
