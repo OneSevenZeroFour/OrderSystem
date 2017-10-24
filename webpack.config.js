@@ -16,6 +16,9 @@ module.exports = {
 			exclude: /(node_modules)/,
 			loader: "style-loader!css-loader"
 		}, {
+			test: /\.(svg|woff|ttf|eot)$/,
+			loader: "file-loader"
+		}, {
 			test: /\.html$/,
 			loader: "html-loader"
 		}, {

@@ -1,0 +1,275 @@
+/* 
+* @Author: Marte
+* @Date:   2017-10-21 14:20:49
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-10-24 12:25:30
+*/
+.user{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+/*=======================top=========================*/
+.top{
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+/*=======================bottom======================*/
+.bottom{
+    width: 100%;
+    height: 0.988rem;
+    background: #eee;
+    color:#fff;
+    font-size: 0.3rem;
+    line-height: 0.988rem;
+    text-align: right;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding:0 0.2rem;
+    background: #f78143;
+}
+.bottom .call{
+    font-size: 0.24rem;
+    float:left;
+    display:block;
+    width: 20%;
+    text-align: center;
+    margin-left: -0.2rem;
+}
+.bottom .check{
+    font-size: 0.24rem;
+    margin-left: 1em;
+}
+/*=========================left========================*/
+.type{
+    width: 25%;
+    font-size: 0.24rem;
+    line-height: 3em;
+    color: #d4d4d4;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: url(../img/bg/bg4.jpg) no-repeat #444258;
+    background-size: 4.66rem 3.88rem;
+    background-position: 0rem 4.44rem;
+    border-bottom: 1px dashed #fff;
+    border-bottom: 1px dashed #fff;
+}
+.type li{
+    width: 100%;
+    border-bottom: 0.1em dotted #fff;
+    position:relative;
+}
+.type li.on{
+    background: #c60000;
+    color:#fff;
+    border-color:#fff;
+}
+.type li span{
+    position: absolute;
+    right: 0.06rem;
+    top: 0.06rem;
+    display: inline-block;
+    border: none;
+    color: #fe524e;
+    background: #fff;
+    font-size: 0.188rem;
+    font-weight: normal;
+    text-align: center;
+    line-height: 1.32em;
+    border-radius: 50%;
+    padding: 0.04rem 0.1rem;
+}
+.type li.on span{
+    background: #fe524e;
+    color:#fff;
+}
+/*=========================right========================*/
+.menu{
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right:1.5%;
+    background: #fafafa;
+}
+.food{
+    float: left;
+    width: 45%;
+    font-size: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 2%;
+    position: relative;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 0.12rem;
+    -webkit-box-shadow: 0.02rem 0.02rem 0.06rem #666;
+            box-shadow: 0.02rem 0.02rem 0.06rem #666;
+    background: #fff;
+    padding-top: 0.1rem;
+}
+.food img{
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.08rem;
+}
+.food .txt{
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    padding: 0.1rem;
+    padding-right: 0;
+}
+.txt .name{
+    font-size: 0.266rem;
+    color: #222;
+    line-height: 1.5em;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+}
+.txt .price{
+    color:#DD0004;
+    font-size: 0.22rem;
+    line-height: 1.5em;
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    padding-top: 0.06rem;
+}
+.txt .num{
+    text-align: right;
+    color:#f78143;
+    font-size: 0;
+    position: absolute;
+    right: 2%;
+    bottom: 10%;
+}
+.txt .num .click{
+    border:1px solid #ddd;
+    border-radius: 50%;
+    display:inline-block;
+    font-size: 0.18rem;
+    width: 0.24rem;
+    height: 0.24rem;
+    line-height: 0.2rem;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    text-align: center;
+    color:#666;
+}
+.txt .num .click:active{
+    color:#fe524e;
+    border-color:#fe524e;
+}
+.txt .num .quan{
+    font-size: 0.244rem;
+    margin:0 0.5em;
+}
+.txt .num .add{
+    color:#f78143;
+    border-color:#f78143;
+}
+.txt .num .hidefirst{
+    display:none;
+}
+
+/*=======================order=======================*/
+.order_shell{
+    width: 75%;
+    height: 100%;   
+}
+.order_laying{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 90;    
+}
+.order{
+    height: 97%;
+    position: relative;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.2rem 0.4rem 0 0.2rem;
+    background: #fafafa;
+    z-index: 999;
+}
+.order::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+}
+.order .close{
+    display: block;
+    position: fixed;
+    top: 0.1rem;
+    right: 0rem;
+    text-align: center;
+    font-size: 0.6rem;
+    color: #2F4F4F;
+    line-height: 1em;
+    z-index: 99;
+}
+.order .li{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 0.1rem;
+    border-bottom: 1px dashed #ddd;
+    -webkit-box-sizing:border-box;
+            box-sizing:border-box;
+}
+
+.order .li img{
+    display:block;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.08rem;
+}
+.order .txt{
+    -webkit-box-flex:1;
+        -ms-flex:1;
+            flex:1;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+}
+.order .send_btn{
+    display: block;
+    font-size: 0.222rem;
+    position: fixed;
+    right: 0.22rem;
+    bottom: 2.22rem;
+    padding: 0.11rem 0.22rem;
+    border-radius: 0.04rem;
+    -webkit-box-shadow: 0.04rem 0.04rem #666;
+            box-shadow: 0.04rem 0.04rem #666;
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+    z-index: 999;
+}

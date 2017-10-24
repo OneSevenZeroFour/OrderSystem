@@ -32,7 +32,7 @@ import "./css/base.css";
 import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
 
-var socket = io("http://localhost:10002");
+var socket = io("http://10.3.132.65:10002");
 
 function test() {
 	socket.emit("test", {
@@ -43,9 +43,9 @@ test();
 var element = (
 	<HashRouter>
 	<Provider store={store}>
-	<div>
-		<Route path="*" component={Renter} />
-		<Route path="/" component={Renter} />
+	<div className="ele">
+		<Route exact path="/" component={Renter} />
+		 <Route exact path="/user" component={User}></Route>
 	</div>
 	</Provider>
 	</HashRouter>

@@ -34,7 +34,10 @@ img{
     height: 100%;
     border:none;
 }
-
+#demo,.ele{
+    height: 95%;
+    overflow-y: auto;
+}
 @media (min-width:1300px)
 {
     body, html

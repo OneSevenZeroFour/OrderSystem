@@ -11,7 +11,6 @@ export default class Renter extends React.Component{
         super(props);
         this.state = {
         	desk_box:[],
-        	flag:false
         };
         this.popmenu = ()=>{
         	console.log(this)

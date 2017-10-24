@@ -24,11 +24,46 @@ app.use(bodyps.urlencoded({
 //创建socket服务
 io.sockets.on("connection", function(socket) {
 	console.log("socket已监听")
+	socket.on("send_desk_id_toback", function(data) {
+		guest_id.push(data);
+		console.log('guest', guest_id);
+	}).on("send_order_id_toback", function(data) {
+		//接收订单号与桌子号
+	});
 	socket.on("test", function(data) {
 		console.log(data);
 	})
 })
 
+var guest_id = [],
+	kitchen_id = "";
+// ============================== DYT start =============================
+app.post('/getMenu', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body.type;
+	console.log("type:", arg);
+	connection.query('SELECT * from diancan where type="' + arg + '" order by id', function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress));
+	});
+
+}).post('/getType', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * from types order by sorts', function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress));
+	});
+
+}).post('/saveOrder', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body;
+	console.log(arg);
+	connection.query(`insert into userOrder (desk,content,sum,orderTime) values ("${arg.desk}","${encodeURI(arg.txt)}",${arg.pay},"${arg.time}")`, function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress.insertId));
+	});
+
+});
 //查询桌子的状态
 app.get("/desk", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -42,12 +77,33 @@ app.get("/desk", function(req, res) {
 });
 app.get("/foods", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	connection.query(`select * from userorder where desk='` + req.query.desk + "'", function(err, results, file) {
+	connection.query(`select * from userorder where desk='` + req.query.desk + "' and state != '2'", function(err, results, file) {
 		if (err) throw err;
 		// console.log(results);
 		res.send(JSON.stringify({
 			results
 		}));
+	})
+});
+
+app.get("/order", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update userorder set content = '" + req.query.content + "',state = '1' where desk='" + req.query.desk + "' and state = '0'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
+	})
+});
+
+app.get("/setPeople", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "' where desk='桌号" + req.query.desk + "'";
+	console.log(sqler)
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
 	})
 });
 /*用http去监听端口 不用express框架监听*/
