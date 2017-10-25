@@ -1,7 +1,7 @@
 import React from "react";
 import TableCell from "./tableCell.jsx";
 import {connect} from "react-redux";
-import $ from "jquery";
+import axios from "axios";
 class Kitchen extends React.Component{
     constructor(props){
         super(props)
@@ -9,33 +9,36 @@ class Kitchen extends React.Component{
             kitchen: [],
             currentTab: -1
         }
+        this.loadKitchen = this.loadKitchen.bind(this);
     }  
-    componentWillMount() {
-        let self = this;
-        console.log(2222)
-        $.ajax({
-            url: 'http://localhost:10002/kitchen',
-            type: 'GET',
-            dataType: 'json',
-            data: {}
-        })
-        .done(function(data) {
-            /* self.setState({
-                kitchen: data,
-                currentTab: 0
-            })  */
-            self.props.setStore({
-                kitchen: data,
-                currentTab: 0
+    loadKitchen(self){
+        axios.get("http://localhost:10002/kitchen")
+            .then(function(res){
+                console.log(res);
+                var curtab = 0;
+                // console.log(self.props.store);
+                if(self.props.store){
+                    curtab = self.props.store.currentTab;
+                    console.log(curtab)
+                }
+                self.props.setStore({
+                    kitchen: res.data,
+                    currentTab: curtab
+                });
+                console.log(self.props["store"])
+            })
+            .catch(function(err){
+                console.log(err);
             });
-            // console.log(self.state.kitchen)
-            console.log(self.props["store"])
-        });
     }
-    
+    componentDidMount() {
+        this.loadKitchen(this);
+    }
+
     switchTab(ev,idx){
         ev.preventDefault();
-        if(this.props.currentTab != idx){
+        if(this.props.store.currentTab != idx){
+            console.log("switch")
             // this.setState(Object.assign({},this.state,{currentTab: idx}))
             this.props.setStore(Object.assign({}, this.props.store,{currentTab:idx}))
         }
@@ -63,7 +66,7 @@ class Kitchen extends React.Component{
                                         }) 
                                     }
                                 })(this)
-                            }
+                            } 
                         </ul>
                     </div>
                     <div className="kitchen-main">
@@ -72,8 +75,16 @@ class Kitchen extends React.Component{
                             {
                                 (function(self){
                                     if(self.props["store"]){
-                                        let item = self.props["store"]["kitchen"][self.props["store"]["currentTab"]];
-                                        return (<TableCell arg={item} />)
+                                        if(self.props.store.kitchen.length > 0){
+                                            let item = self.props["store"]["kitchen"][self.props["store"]["currentTab"]];
+                                            return (<TableCell arg={item} tabidx={self.props["store"]["currentTab"]}/>)
+                                        }else{
+                                            return (
+                                                <div className="nodata">
+                                                    <p>没有数据啦</p>
+                                                </div>
+                                            )
+                                        }
                                     }
                                 })(this)
                             }

@@ -2,6 +2,8 @@
 const http = require("http");
 const mysql = require("mysql");
 const express = require("express");
+const url = require("url");
+const querystring = require("querystring");
 const bodyps = require("body-parser");
 // let $ = require("jquery");
 
@@ -62,7 +64,51 @@ app.get("/kitchen",function(req,res) {
 		res.send(JSON.stringify(uncompletedData));
 	});
 });
+app.get("/changeState",function(req,res){
+	res.setHeader("Access-Control-Allow-Origin","*");
+	// 获取url中参数
+	var query = url.parse(req.url).query;
+	var params = querystring.parse(query);
+	var selStr = "SELECT * FROM userorder WHERE id=" + params.orderid;
+
+	connection.query(selStr,function(err, results, file){
+		if(err) {
+			console.log("select failed!");
+			/* 若数据库查询失败，返回状态 */
+			/* code属性，1表示成功，0表示失败 */
+			res.send(JSON.stringify({
+				status: "fail",
+				code: 0 								
+			}))
+			return ;
+		};
+		var orderitem = results[0];
+		var foodlist = JSON.parse(decodeURI(orderitem.content));
+		foodlist[params["foodid"]].state = params["state"];
+		/* 修改后的数据 */
+		var foodcont = encodeURI(JSON.stringify(foodlist));
+		var updStr = "UPDATE userorder SET content = '" 
+					+ foodcont + "' WHERE id='"
+					+ params["orderid"] + "'";
+
+		connection.query(updStr,function(error,suc){
+			if(error) {
+				console.log("updata failed!");
+				res.send(JSON.stringify({
+					status: "fail",
+					code: 0
+				}))
+				return ;
+			}
+			console.log('-----updata------');
+			console.log('affectrow ',suc.affectedRows);
+			res.send(JSON.stringify({
+				status: "success",
+				code: 1
+			}))
+		});
+	})
+	
+})
 console.log("Server Is Start!!!");
 app.listen(10002);
-
-

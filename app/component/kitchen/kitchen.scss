@@ -2,7 +2,7 @@
  * @Author: lzh 
  * @Date: 2017-10-23 10:09:10 
  * @Last Modified by: lzh
- * @Last Modified time: 2017-10-24 21:09:52
+ * @Last Modified time: 2017-10-25 19:19:12
  */
 /*
  + 背景色: #eeeeee
@@ -93,6 +93,14 @@
     }
     .foodlist{
     }
+}
+.nodata{
+    width: 100%;
+    height: 80vh;
+    font-size: .30rem;
+    color: #c5c5c5;
+    text-align: center;
+    line-height: 80vh;
 }
 
 .foodcell{
