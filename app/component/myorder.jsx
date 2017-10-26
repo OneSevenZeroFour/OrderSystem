@@ -69,8 +69,9 @@ class Myorder extends React.Component{
         this.getList();
         socket.on("get_order_state",function(data){
             // console.log(data);
-            self.getList();
-        })
+            if(data.desk===self.props.desk)
+                self.getList();
+        });
     }
 }
 
