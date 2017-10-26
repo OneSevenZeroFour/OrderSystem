@@ -121,3 +121,14 @@
     width: 100%;
     padding: 0.111rem 0;
 }
+.enter_ex{
+    margin-top: 60%;
+    margin-left: 85%;    
+    font-size: 0.16rem;
+    width: 1rem;
+    padding: 0.2rem;  
+}
+.enter_ex a{
+    color: #333;
+    text-decoration: underline;   
+}

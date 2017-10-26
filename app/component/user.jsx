@@ -21,6 +21,7 @@ class User extends React.Component{
             desk:this.props.desk,
             order_id:false,
             zoomImg:false,
+            tips_inventory:50,
         },
         this.changeList = (e)=>{
             this.setState(Object.assign({},this.state,{
@@ -35,7 +36,11 @@ class User extends React.Component{
                 type: 'POST',
                 data: {type: arg}
             }).done(function(data) {
-                data = JSON.parse(data);
+                try{
+                    data = JSON.parse(data);
+                }catch(err){
+                    console.log(err)
+                }
                 self.setMenus(data);
             });
             
@@ -47,7 +52,11 @@ class User extends React.Component{
                 url: 'http://10.3.132.65:10002/getType',
                 type: 'POST',
                 success:function(data){
-                    data = JSON.parse(data);
+                    try{
+                        data = JSON.parse(data);
+                    }catch(err){
+                        console.log(err)
+                    }
                     self.setTypes(data);
                     self.getList(data[0].name);
                 }
@@ -187,9 +196,9 @@ class User extends React.Component{
             
         }
         this.zoomImgIn = (e)=>{
-            var url = e.target.getAttribute("src");
+            var url_link = e.target.getAttribute("src");
             this.setState(Object.assign({},this.state,{
-                zoomImg:url
+                zoomImg:url_link
             }));            
         }
         this.zoomImgOut = ()=>{
@@ -261,6 +270,17 @@ class User extends React.Component{
                                                    {bool?self.state.txt[type_idx][idx].num:0}</span>
                                                <span onClick={self.addFun} className="add click">+</span>
                                            </p>
+                                            {item.inventory <= 10?
+                                                <div className="inventory_tips">
+                                                    {
+                                                        item.inventory > 0?
+                                                               <span>菜品所剩不多啦！</span>
+                                                       :
+                                                               <span className="sold_out">本菜品已售罄！</span>
+                                                       
+                                                    }                                                    
+                                                </div>:""
+                                            }                                          
                                        </div>
                                    </div>
                                })}

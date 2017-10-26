@@ -35,7 +35,7 @@ img{
     border:none;
 }
 #demo,.ele{
-    height: 95%;
+    height: 96%;
     overflow-y: auto;
 }
 @media (min-width:1300px)

@@ -1,0 +1,144 @@
+section .admin_header{
+    height: 0.6rem;
+    background: #0E90D2;
+    color: #EEEEEE;
+    line-height: 0.6rem;
+    width: 100%;
+    display: flex;
+}
+section .admin_header .am_topbar{
+    font-size: 0.18rem;
+    padding-left: 0.2rem;
+    width: 20%;
+}
+section .admin_header .am_collapse{
+    font-size: 0.14rem;
+    width: 60%;
+    margin-left: 20%;
+}
+section .admin_header .am_collapse .info_list{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.am_collapse .info_list li{
+    margin: 0 0.1rem;
+}
+.am_collapse .info_list li a{
+    display: block;
+    color: #eeeeee;
+}
+.controlled .am-g{
+    width: 100%;
+    height: 0.66rem;
+    display: flex;
+    font-size: 0.16rem;
+    background: #f8f8f8;
+    line-height: 0.66rem;	
+}
+.controlled .am-g .control_skill{
+    width: 30%;
+    padding-left: 4%;
+}
+.controlled .am-g .control_skill button{
+	display: inline-block;
+    margin-bottom: 0;
+    color: #444;
+    padding: .4em 1em;
+    vertical-align: middle;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    background-image: none;
+    border: 1px solid #999;
+    border-radius: 0;
+    cursor: pointer;
+    outline: 0;
+    margin-right: -1px;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: background-color .3s ease-out,border-color .3s ease-out;
+    transition: background-color .3s ease-out,border-color .3s ease-out;	
+}
+.controlled .am-g .control_type{
+    width: 20%;
+    padding-left: 10%;	
+}
+.controlled .am-g .control_type select{
+    min-width: 1rem;
+    outline: none;
+    padding: 0.06rem 0;
+}
+.controlled .am-g .control_search{
+    width: 45%;
+    box-sizing: border-box;
+    padding-left: 10%;	
+}
+.controlled .am-g .control_search input{
+    outline: none;
+    vertical-align: middle;
+    padding: 0.06rem 0;
+    padding-left: 0.06rem;	
+}
+.controlled .am-g .control_search button{
+    display: inline-block;
+    padding: 0.048rem 0.2rem;
+    margin-left: -0.01rem;	
+}
+.dom_tilte{
+    font-size: 0.08rem;
+    width: 100%;
+    line-height: 0.44rem;
+}
+.dom_tilte .dom_tilte_box{
+    overflow-x: hidden;
+    height: 5.2rem;
+    overflow-y: scroll;
+}
+.dom_tilte .dom_tilte_box table{
+    width: 96%;
+    margin: 0 auto;
+    border-spacing: 0;
+    border-collapse: separate;    
+}
+.dom_tilte .dom_tilte_box table thead{
+    height: 0.44rem;	
+}
+.dom_tilte_box table thead th{
+    border-bottom: 0.01rem solid #ddd;
+    padding-right: 0.1rem;	
+}
+.all_list tr td input{
+    outline: none;
+    padding: 0.04rem 0;
+    box-sizing: border-box;
+    padding-left: 0.04rem;
+    border-radius: 0.02rem;	
+    width: 0.76rem;    
+}
+.all_list tr td .am-btn-toolbar button{
+	display: inline-block;
+    margin-bottom: 0;
+    color: #444;
+    padding: 0.2em 0.8em;
+    vertical-align: middle;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    background-image: none;
+    border: 1px solid #999;
+    border-radius: 0;
+    cursor: pointer;
+    outline: 0;
+    margin-right: -1px;	
+}
+
+
+section footer{
+    height: 0.2rem;
+    font-size: 0.08rem;
+    text-align: center;
+}

@@ -160,6 +160,14 @@ app.get("/setState", function(req, res) {
 		res.send('state-ok');
 	})
 });
+app.get("/FoodDB", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "select * from diancan";
+	connection.query(sqler, function(err, ret, file) {
+		if (err) throw err;
+		res.send(JSON.stringify(ret))
+	})
+});
 /*用http去监听端口 不用express框架监听*/
 server.listen(10002, function() {
 	console.log("Server Is Start!!!");

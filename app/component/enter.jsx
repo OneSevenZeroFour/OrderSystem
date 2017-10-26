@@ -70,6 +70,7 @@ export default class Renter extends React.Component{
 						}
 					</ul>
 				</div>
+				<p className="enter_ex"><Link to="/manage">后台登录</Link></p>
 			</header>
 		)
 	}

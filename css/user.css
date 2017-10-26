@@ -244,6 +244,7 @@ li.enters i:nth-child(8){
             flex:1;
     padding: 0.1rem;
     padding-right: 0;
+    position:relative;
 }
 .txt .name{
     font-size: 0.222rem;
@@ -269,6 +270,7 @@ li.enters i:nth-child(8){
     position: absolute;
     right: 2%;
     bottom: 10%;
+    text-decoration: underline;    
 }
 .txt .num .click{
     border:1px solid #ddd;
@@ -298,7 +300,33 @@ li.enters i:nth-child(8){
 .txt .num .hidefirst{
     display:none;
 }
-
+.txt .inventory_tips{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #FFE793;
+    border: 1px solid #ECC849;
+    padding-left: 0.08rem;
+}
+.txt .inventory_tips span{
+    font-size: 0.08rem;
+    color: #555;
+}
+.txt .inventory_tips .sold_out{
+    position: absolute;
+    left: -3.3rem;
+    top: -0.1rem;
+    right: 0;
+    bottom: 0;
+    width: 3.4rem;
+    height: 1.22rem;
+    display: block;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    text-align: center;
+    line-height: 1.22rem;
+    font-size: 0.2rem;
+}
 /*=======================order=======================*/
 .order_shell{
     width: 75%;

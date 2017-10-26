@@ -33,10 +33,35 @@ footer .foot_menu li{
 footer .foot_menu li:last-child{
 	border: 0 none;
 }
+footer .foot_menu li:nth-of-type(2) a i{
+    transform-origin: 100% 50%;
+}
+footer .foot_menu li:nth-of-type(2) a i.call_server{
+    -webkit-animation:rock 1s linear 1.4s infinite alternate; 
+}
+@-webkit-keyframes rock  
+{  
+    0%{  
+        transform: rotate(0deg); 
+    }  
+    50%{  
+        transform: rotate(24deg);   
+    }  
+    100%{  
+        transform: rotate(-24deg);  
+    }  
+}  
+
 footer .foot_menu li i{
+    display: block;
     font-size: 0.288rem;
     vertical-align: middle;
-    margin-right: 0.06rem;
+    width: 0.1rem;
+    height: 0.1rem;
+    margin: 0 auto;
+    margin-bottom: 0.14rem;
+    transform: translate(-100%);
+    margin-top: -0.1rem;
 }
 footer .foot_menu li a{
     display: block;
