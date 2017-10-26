@@ -3170,7 +3170,7 @@ exports = module.exports = __webpack_require__(8)(undefined);
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n/*\r\n * @Author: lzh \r\n * @Date: 2017-10-23 10:09:10 \r\n * @Last Modified by: lzh\r\n * @Last Modified time: 2017-10-25 19:19:12\r\n */\n/*\r\n + 背景色: #eeeeee\r\n + 主色: #fe524e\r\n + 辅助色: #f78143\r\n + 线条能用色: #cccccc #dddddd #d8d8d8\r\n */\n#kitchen {\n  width: 100%;\n  height: 100%;\n  background-color: #eeeeee;\n  display: flex;\n  flex-direction: column; }\n  #kitchen header {\n    height: .84rem;\n    position: relative;\n    z-index: 10;\n    background-color: #fe524e;\n    text-align: center;\n    line-height: .84rem;\n    box-shadow: 0 2px 2px 0px #ccc; }\n    #kitchen header h1 {\n      color: #fff;\n      font-size: .30rem;\n      font-weight: 700; }\n  #kitchen .kitchen-wrap {\n    flex: 1;\n    width: 100%;\n    display: flex; }\n  #kitchen .kitchen-main {\n    flex: 1;\n    overflow-y: auto; }\n  #kitchen .kitchen-table {\n    overflow-y: auto;\n    width: 1.6rem;\n    margin-right: .2rem;\n    background-color: #fff; }\n\n.tablelist {\n  font-size: .2rem; }\n  .tablelist .tableItem {\n    height: 1rem;\n    text-align: center;\n    line-height: 1rem;\n    border-bottom: 1px solid #eeeeee; }\n  .tablelist .tableItem-sel {\n    background-color: #eeeeee;\n    color: #fff; }\n\n.tablecell {\n  border-bottom: 2px solid #ddd;\n  padding: 10px; }\n  .tablecell .table-msg {\n    color: #333;\n    margin-bottom: 10px; }\n    .tablecell .table-msg .tabletitle {\n      padding-left: .1rem;\n      font-size: .2rem; }\n      .tablecell .table-msg .tabletitle .titlespan {\n        border-bottom: 2px solid #ddd; }\n    .tablecell .table-msg .orderstate {\n      margin-top: .1rem;\n      color: #666; }\n\n.nodata {\n  width: 100%;\n  height: 80vh;\n  font-size: .30rem;\n  color: #c5c5c5;\n  text-align: center;\n  line-height: 80vh; }\n\n.foodcell {\n  border-radius: 5px;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-bottom: 2px solid #ddd; }\n  .foodcell .cell-wrap {\n    width: 100%;\n    display: flex; }\n    .foodcell .cell-wrap .food-icon {\n      padding: .15rem 0 .15rem .15rem;\n      margin-right: .25rem; }\n      .foodcell .cell-wrap .food-icon img {\n        border-radius: 5px;\n        display: block;\n        height: .84rem;\n        width: .84rem; }\n    .foodcell .cell-wrap .food-msg {\n      flex: 1;\n      padding-top: .05rem; }\n      .foodcell .cell-wrap .food-msg .msg-title {\n        padding-top: .1rem;\n        color: #333;\n        font-size: .24rem; }\n      .foodcell .cell-wrap .food-msg .msg-state {\n        padding-top: .2rem;\n        font-size: .20rem;\n        color: #888; }\n    .foodcell .cell-wrap .food-state {\n      flex: 1;\n      display: flex;\n      font-size: .22rem;\n      color: #fff;\n      text-align: center;\n      align-items: center;\n      margin-right: .2rem;\n      box-sizing: border-box;\n      height: 1.14rem;\n      padding: 10px 0; }\n      .foodcell .cell-wrap .food-state .stateblock {\n        height: .94rem;\n        flex: 1;\n        line-height: .94rem;\n        margin-right: 5px;\n        border-radius: 5px; }\n      .foodcell .cell-wrap .food-state .readying {\n        background-color: #f78143; }\n      .foodcell .cell-wrap .food-state .cooking {\n        background-color: #3190E8; }\n      .foodcell .cell-wrap .food-state .ordering {\n        background-color: #4CD964; }\n      .foodcell .cell-wrap .food-state .unstate {\n        background-color: #ddd !important;\n        color: #aaa !important; }\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n/*\r\n * @Author: lzh \r\n * @Date: 2017-10-23 10:09:10 \r\n * @Last Modified by: lzh\r\n * @Last Modified time: 2017-10-26 12:26:58\r\n */\n/*\r\n + 背景色: #eeeeee\r\n + 主色: #fe524e\r\n + 辅助色: #f78143\r\n + 线条能用色: #cccccc #dddddd #d8d8d8\r\n */\n#kitchen {\n  width: 100%;\n  height: 100%;\n  background-color: #eeeeee;\n  display: flex;\n  flex-direction: column; }\n  #kitchen header {\n    height: .84rem;\n    position: relative;\n    z-index: 10;\n    background-color: #fe524e;\n    text-align: center;\n    line-height: .84rem;\n    box-shadow: 0 1px 7px 0px #666; }\n    #kitchen header h1 {\n      color: #fff;\n      font-size: .30rem;\n      font-weight: 700; }\n  #kitchen .kitchen-wrap {\n    flex: 1;\n    width: 100%;\n    display: flex; }\n  #kitchen .kitchen-main {\n    flex: 1;\n    overflow-y: auto; }\n  #kitchen .kitchen-table {\n    overflow-y: auto;\n    width: 1.6rem;\n    margin-right: .2rem;\n    background-color: #fff; }\n\n.tablelist {\n  font-size: .2rem; }\n  .tablelist .tableItem {\n    height: 1rem;\n    text-align: center;\n    line-height: 1rem;\n    border-bottom: 1px solid #eeeeee; }\n  .tablelist .tableItem-sel {\n    background-color: #fe524e;\n    color: #fff; }\n\n.tablecell {\n  border-bottom: 2px solid #ddd;\n  padding: 10px; }\n  .tablecell .table-msg {\n    color: #333;\n    margin-bottom: 10px; }\n    .tablecell .table-msg .tabletitle {\n      padding-left: .1rem;\n      font-size: .2rem; }\n      .tablecell .table-msg .tabletitle .titlespan {\n        border-bottom: 2px solid #ddd; }\n    .tablecell .table-msg .orderstate {\n      margin-top: .1rem;\n      color: #666; }\n\n.nodata {\n  width: 100%;\n  height: 80vh;\n  font-size: .30rem;\n  color: #c5c5c5;\n  text-align: center;\n  line-height: 80vh; }\n\n.foodcell {\n  border-radius: 5px;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-bottom: 2px solid #ddd;\n  overflow: hidden; }\n  .foodcell .cell-wrap {\n    width: 100%;\n    display: flex; }\n    .foodcell .cell-wrap .food-icon {\n      padding: .15rem 0 .15rem .15rem;\n      margin-right: .25rem; }\n      .foodcell .cell-wrap .food-icon img {\n        border-radius: 5px;\n        display: block;\n        height: .84rem;\n        width: .84rem; }\n    .foodcell .cell-wrap .food-msg {\n      flex: 1;\n      padding-top: .05rem; }\n      .foodcell .cell-wrap .food-msg .msg-title {\n        padding-top: .1rem;\n        color: #333;\n        font-size: .24rem; }\n      .foodcell .cell-wrap .food-msg .msg-state {\n        padding-top: .2rem;\n        font-size: .20rem;\n        color: #888; }\n        .foodcell .cell-wrap .food-msg .msg-state .foodnum {\n          margin-right: .2rem; }\n    .foodcell .cell-wrap .food-state {\n      flex: 1;\n      display: flex;\n      font-size: .22rem;\n      color: #fff;\n      text-align: center;\n      align-items: center;\n      margin-right: .2rem;\n      box-sizing: border-box;\n      height: 1.14rem;\n      padding: 10px 0; }\n      .foodcell .cell-wrap .food-state .stateblock {\n        height: .94rem;\n        flex: 1;\n        line-height: .94rem;\n        margin-right: 5px;\n        border-radius: 5px; }\n      .foodcell .cell-wrap .food-state .readying {\n        background-color: #f78143; }\n      .foodcell .cell-wrap .food-state .cooking {\n        background-color: #3190E8; }\n      .foodcell .cell-wrap .food-state .ordering {\n        background-color: #4CD964; }\n      .foodcell .cell-wrap .food-state .unstate {\n        background-color: #ddd !important;\n        color: #aaa !important; }\n  .foodcell .completed-wrap {\n    background-color: #ccc; }\n", ""]);
 
 // exports
 
@@ -5330,7 +5330,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Author: lzh 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Date: 2017-10-23 14:05:40 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * @Last Modified by: lzh
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2017-10-25 16:35:38
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @Last Modified time: 2017-10-26 12:26:31
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 var FoodCell = function (_React$Component) {
@@ -5380,7 +5380,9 @@ var FoodCell = function (_React$Component) {
                     params: {
                         orderid: self.props.store.kitchen[self.props.tabidx].id,
                         foodid: self.props.cellidx,
-                        state: 1
+                        state: 1,
+                        name: self.props.arg.name,
+                        num: self.props.arg.num
                     }
                 }).then(function (res) {
                     console.log(res);
@@ -5405,7 +5407,7 @@ var FoodCell = function (_React$Component) {
                         state: 2
                     }
                 }).then(function (res) {
-                    console.log(res);
+                    console.log(self.props.arg);
                     if (res.data.code === 1) {
                         self.loadKitchen(self);
                     }
@@ -5422,7 +5424,7 @@ var FoodCell = function (_React$Component) {
                 { className: "foodcell" },
                 _react2.default.createElement(
                     "div",
-                    { className: "cell-wrap" },
+                    { className: "cell-wrap " + (this.props.arg.state == 2 ? "completed-wrap" : "") },
                     _react2.default.createElement(
                         "div",
                         { className: "food-icon" },
@@ -5439,11 +5441,25 @@ var FoodCell = function (_React$Component) {
                         _react2.default.createElement(
                             "p",
                             { className: "msg-state" },
-                            "\u72B6\u6001: ",
                             _react2.default.createElement(
                                 "span",
-                                null,
-                                "\u51C6\u5907\u4E2D"
+                                { className: "foodnum" },
+                                "\u6570\u91CF:",
+                                this.props.arg.num
+                            ),
+                            _react2.default.createElement(
+                                "span",
+                                { className: "foodstate" },
+                                "\u72B6\u6001:",
+                                function (self) {
+                                    if (self.props.arg.state == 0) {
+                                        return " 准备中";
+                                    } else if (self.props.arg.state == 1) {
+                                        return " 制作中";
+                                    } else {
+                                        return " 以上菜";
+                                    }
+                                }(this)
                             )
                         )
                     ),
@@ -5456,7 +5472,7 @@ var FoodCell = function (_React$Component) {
                             _react2.default.createElement(
                                 "span",
                                 null,
-                                "\u5236\u4F5C"
+                                this.props.arg.state == 1 ? "制作中..." : "制作"
                             )
                         ),
                         _react2.default.createElement(

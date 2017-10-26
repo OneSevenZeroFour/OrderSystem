@@ -2,7 +2,7 @@
  * @Author: lzh 
  * @Date: 2017-10-23 14:05:40 
  * @Last Modified by: lzh
- * @Last Modified time: 2017-10-25 16:35:38
+ * @Last Modified time: 2017-10-26 12:26:31
  */
 
 import React from "react";
@@ -48,7 +48,9 @@ class FoodCell extends React.Component{
                 params:{
                     orderid: self.props.store.kitchen[self.props.tabidx].id,
                     foodid: self.props.cellidx,
-                    state: 1
+                    state: 1,
+                    name: self.props.arg.name,
+                    num: self.props.arg.num
                 }
             })
             .then(function(res){
@@ -76,7 +78,7 @@ class FoodCell extends React.Component{
                 }
             })
             .then(function(res){
-                console.log(res);  
+                console.log(self.props.arg);  
                 if(res.data.code === 1){
                     self.loadKitchen(self)
                 }
@@ -90,18 +92,29 @@ class FoodCell extends React.Component{
     render(){
         return (
             <div className="foodcell">
-                <div className="cell-wrap">
+                <div className={"cell-wrap "+(this.props.arg.state==2?"completed-wrap":"")}>
                     <div className="food-icon">
                         <img src={"../../../"+this.props.arg.img} />
                         
                     </div>
                     <div className="food-msg">
                         <p className="msg-title">{this.props.arg.name}</p>
-                        <p className="msg-state">状态: <span>准备中</span></p>
+                        <p className="msg-state">
+                            <span className="foodnum">数量:{this.props.arg.num}</span> 
+                            <span className="foodstate">状态:{(function(self){
+                                if(self.props.arg.state == 0){
+                                    return " 准备中"
+                                }else if(self.props.arg.state == 1){
+                                    return " 制作中"
+                                }else{
+                                    return " 以上菜"
+                                }
+                            })(this)}</span>
+                        </p>
                     </div>
                     <div className="food-state">  
                         <div className={"cooking stateblock " + (this.props.arg.state==0?"":"unstate")} onClick={this.toReady}>
-                            <span>制作</span>
+                            <span>{this.props.arg.state==1?"制作中...":"制作"}</span>
                         </div>
                         <div className={"ordering stateblock " + (this.props.arg.state==1?"":"unstate")} onClick={this.toOrder}>
                             <span>上菜</span>
