@@ -21,6 +21,10 @@ app.use(bodyps.json());
 app.use(bodyps.urlencoded({
 	extended: true
 }));
+
+
+var guest_id = [],
+	kitchen_id = "";
 //创建socket服务
 io.sockets.on("connection", function(socket) {
 	console.log("socket已监听")
@@ -29,19 +33,31 @@ io.sockets.on("connection", function(socket) {
 		console.log('guest', guest_id);
 	}).on("send_order_id_toback", function(data) {
 		//接收订单号与桌子号
+		console.log('aaaa', data)
+		io.emit('toSetDesk', data);
 	}).on("callServer", function(data) {
 		//呼叫服务员
 		console.log("from desk ", data);
+		io.emit('getServer', {
+			status: '呼叫服务',
+			id: data.id
+		})
 	}).on("callToPay", function(data) {
 		//呼叫服务员
 		console.log("pay from desk ", data);
+		io.emit('getServer', {
+			status: '呼叫结账',
+			id: data.id
+		})
+	}).on("setServer", function(data) {
+		//改变桌子状态
+		console.log("desk-status", data);
+		io.emit('getServer', data);
 	});
 	io.emit("get_order_state", "send get");
 
 })
 
-var guest_id = [],
-	kitchen_id = "";
 // ============================== DYT start =============================
 app.post('/getMenu', function(req, res) {
 	res.append("Access-Control-Allow-Origin", "*");
@@ -71,9 +87,10 @@ app.post('/getMenu', function(req, res) {
 	res.append("Access-Control-Allow-Origin", "*");
 	var arg = req.body.id;
 	console.log("get order by id", arg);
-	connection.query(`SELECT * from userOrder where id=${arg}`, function(err, ress, field) {
+	connection.query(`SELECT * from userOrder where desk=${arg} and state!=2`, function(err, ress, field) {
 		if (err) throw err;
-		res.send(ress[0]);
+		// console.log(ress[0]);
+		res.send(ress);
 	});
 
 });
@@ -111,12 +128,36 @@ app.get("/order", function(req, res) {
 
 app.get("/setPeople", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "' where desk='桌号" + req.query.desk + "'";
+	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "',price = '" + req.query.price + "' where desk='桌号" + req.query.desk + "'";
 	console.log(sqler)
 	connection.query(sqler, function(err, results, file) {
 		if (err) throw err;
 		// console.log(results);
 		res.send('ok');
+	})
+});
+
+app.get("/setStatus", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	if (req.query.status == '可坐') {
+		var sqler = "update desk set status = '" + req.query.status + "',manys = 0,price = 0,times = '' where desk='" + req.query.desk + "'";
+	} else {
+		var sqler = "update desk set status = '" + req.query.status + "' where desk='" + req.query.desk + "'";
+	}
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('status-ok');
+	})
+});
+
+app.get("/setState", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update userorder set state = '2' where desk='" + req.query.desk + "' and state='1'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('state-ok');
 	})
 });
 /*用http去监听端口 不用express框架监听*/

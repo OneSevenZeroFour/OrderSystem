@@ -4,11 +4,11 @@
  */
 footer .foot_menu{
     width: 100%;
-    height: 0.888rem;
+    height: 0.688rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    line-height: 0.888rem;
+    line-height: 0.688rem;
     background: #585858;
     -ms-flex-pack: distribute;
     justify-content: space-around;
@@ -17,8 +17,6 @@ footer .foot_menu{
 }
 footer .foot_menu li{
 	width: 100%;
-    height: 0.888rem;
-    line-height: 0.888rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -36,15 +34,12 @@ footer .foot_menu li:last-child{
 	border: 0 none;
 }
 footer .foot_menu li i{
-    display: block;
-    height: 0.22rem;
-    color: #fff;
     font-size: 0.288rem;
-    margin-bottom: 0.04rem;	
+    vertical-align: middle;
+    margin-right: 0.06rem;
 }
 footer .foot_menu li a{
     display: block;
-    height: 0.888rem;	
     font-size: 0.164rem;
     color: #fff;	
     transition: 0.3s linear;

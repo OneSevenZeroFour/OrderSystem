@@ -20,7 +20,7 @@ class Ufooter extends React.Component{
                     clas:"icon-remind_fill"
                 },{
                     title:"我的订单",
-                    herfs:"#/myorder",
+                    herfs:"javascript:;",
                     clas:"icon-activity_fill"
                 },{
                     title:"呼叫结账",
@@ -28,11 +28,12 @@ class Ufooter extends React.Component{
                     clas:"icon-financial_fill"
                 }
             ],
-            bg_num:this.props.bg_num
+            bg_num:this.props.bg_num,
+            haso:this.props.hasorder
         }
         this.change_bg = (e) => {
             var idx = e.target.dataset.idx;
-            if(idx==0||idx==2)
+            if(idx==0||(idx==2&&this.state.haso))
                 this.props.dispatch({type:"changebg",bg_num:idx});
             this.setState(Object.assign({},this.state,{
                 bg_num:idx
@@ -63,7 +64,7 @@ class Ufooter extends React.Component{
                 {
                     this.state.list.map(function(item,idx){
                         return <li key={idx}>
-                                <a href={item.herfs} data-idx={idx} onClick={this.change_bg} className={this.state.bg_num == idx?"active_bg":""}><i className={'iconfont '+item.clas}></i>{item.title}</a>
+                                <a href={idx==2&&this.state.haso?"#/myorder":item.herfs} data-idx={idx} onClick={this.change_bg} className={this.state.bg_num == idx?"active_bg":""}><i className={'iconfont '+item.clas}></i>{item.title}</a>
                             </li>
                         }.bind(this))
                     }
@@ -71,11 +72,11 @@ class Ufooter extends React.Component{
             </footer> 
         )
     }
-    componentWillReceiveProps(){
+    componentWillReceiveProps(nextProps){
         this.setState(Object.assign({},this.state,{
-            bg_num:this.props.bg_num
-        }))
-        console.log(this.state);
+            bg_num:nextProps.bg_num,
+            haso:nextProps.hasorder
+        }));
     }
 
 }

@@ -19,7 +19,8 @@ class User extends React.Component{
             showOrder:false,
             showOrderEnter:true,
             desk:this.props.desk,
-            order_id:false
+            order_id:false,
+            zoomImg:false,
         },
         this.changeList = (e)=>{
             this.setState(Object.assign({},this.state,{
@@ -30,7 +31,7 @@ class User extends React.Component{
         this.getList = (arg)=>{
             var self = this;
             $.ajax({
-                url: 'http://localhost:10002/getMenu',
+                url: 'http://10.3.132.65:10002/getMenu',
                 type: 'POST',
                 data: {type: arg}
             }).done(function(data) {
@@ -43,7 +44,7 @@ class User extends React.Component{
             console.log('getType');
             var self = this;
             $.ajax({
-                url: 'http://localhost:10002/getType',
+                url: 'http://10.3.132.65:10002/getType',
                 type: 'POST',
                 success:function(data){
                     data = JSON.parse(data);
@@ -167,12 +168,15 @@ class User extends React.Component{
                 type: 'POST',
                 data: obj,
                 success:function(data){
-                    console.log('id',data);
+                    // console.log('id',data);
                     // 不能再点
                     self.setState(Object.assign({},self.state,{
                         showOrderEnter:false,
                         showOrder:false,
-                        order_id:data
+                        order_id:data,
+                        pay:"0.00",
+                        txt:[],
+                        sum:[]
                     }));
                     self.props.dispatch({type:"setOrderId",oid:data,hasorder:true});
                     //发送socket
@@ -182,7 +186,17 @@ class User extends React.Component{
             });
             
         }
-
+        this.zoomImgIn = (e)=>{
+            var url = e.target.getAttribute("src");
+            this.setState(Object.assign({},this.state,{
+                zoomImg:url
+            }));            
+        }
+        this.zoomImgOut = ()=>{
+            this.setState(Object.assign({},this.state,{
+                zoomImg:false
+            }));
+        }
     }
 
     render(){
@@ -219,14 +233,25 @@ class User extends React.Component{
                                     {self.state.sum[index]?<span>{self.state.sum[index]}</span>:""}
                                 </li>;
                             })}
-                            {this.state.showOrderEnter?<li className="li" onClick={this.sureOrder}>下单入口</li>:""}
+                            {this.state.showOrderEnter?<li className="li enters" onClick={this.sureOrder}><i>小</i><i>主, </i><i>点</i><i>这</i><i>里</i><i>下</i><i>单</i><i>哦！</i></li>:""}
                         </ul>
-                        <div className='menu' index={this.state.onWhich}>
-                            {this.state.menus.map(function(item,idx){
+                        <div className='menu' index={self.state.onWhich}>
+                            {self.state.menus.map(function(item,idx){
                                var type_idx = self.state.onWhich;
                                var bool = self.state.txt[type_idx]&&self.state.txt[type_idx][idx];
                                return <div className="food" key={item.id} index={idx}>
-                                       <img src={item.imgurl} />
+                                       <img src={item.imgurl} onClick={self.zoomImgIn}/>
+                                       {    self.state.zoomImg?
+                                            <aside>
+                                                 <content>
+                                                     <div>
+                                                         <img src={self.state.zoomImg} />
+                                                     </div>
+                                                     <button onClick={self.zoomImgOut}>&times;</button>
+                                                 </content>
+                                            </aside>:""
+                                       }
+                                       
                                        <div className="txt">
                                            <p className="name">{item.dish_name}</p>
                                            <p className="price">￥<span>{item.price}</span>/份</p>
@@ -242,13 +267,12 @@ class User extends React.Component{
                            </div>
                     </div>   
                 }               
-
                 <UFooter /> 
             </div>
             )
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.getType();
         socket.emit('send_desk_id_toback',this.state.desk);
     }

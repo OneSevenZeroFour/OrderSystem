@@ -54,25 +54,50 @@
 /*=========================left========================*/
 .type{
     width: 25%;
-    font-size: 0.24rem;
+    font-size: 0.192rem;
     line-height: 3em;
     color: #d4d4d4;
     text-align: center;
     overflow-x: hidden;
     overflow-y: auto;
     background: url(../img/bg/bg4.jpg) no-repeat #444258;
-    background-size: 4.66rem 3.88rem;
-    background-position: 0rem 4.44rem;
-    border-bottom: 1px dashed #fff;
+    background-size: contain;
+    background-position: 0rem 4.32rem;
     border-bottom: 1px dashed #fff;
 }
 .type li{
     width: 100%;
-    border-bottom: 0.1em dotted #fff;
+    border-bottom: 0.06em dotted #fff;
     position:relative;
+    background-repeat: no-repeat;
+    background-size: 10%;
+    background-position: 26% 50%;    
+}
+.type li:nth-of-type(1){
+    background-image: url(../img/bg/hot.png);
+}
+.type li:nth-of-type(2){
+    background-image: url(../img/bg/经典回顾.png);
+}
+.type li:nth-of-type(3){
+    background-image: url(../img/bg/冷菜.png);
+}
+.type li:nth-of-type(4){
+    background-image: url(../img/bg/食物.png);
+}
+.type li:nth-of-type(5){
+    background-image: url(../img/bg/饼干糕点.png);
+}
+.type li:nth-of-type(6){
+    background-image: url(../img/bg/饮料.png);
+}
+.type li:nth-of-type(7){
+    background-image: url(../img/bg/聚收藏.png);
+    background-size: 8%;
+    background-position: 5% 50%;
 }
 .type li.on{
-    background: #c60000;
+    background-color: #c60000;
     color:#fff;
     border-color:#fff;
 }
@@ -91,6 +116,63 @@
     border-radius: 50%;
     padding: 0.04rem 0.1rem;
 }
+.type li.enters{
+    color: #fff;
+    text-decoration: underline;
+    font-size: 0.14rem;  
+    padding-left: 0.366rem;
+    background-color: #595959;
+    overflow: hidden;      
+}
+.type li.enters i{
+        float:left;  
+        position: relative; 
+        margin-left: 0.08rem;    
+}
+li.enters i:nth-child(1){  
+    -webkit-animation:jump 1s linear 0s infinite alternate;  
+}  
+
+li.enters i:nth-child(2){  
+    -webkit-animation:jump 1s linear 0.2s infinite alternate;  
+}  
+
+li.enters i:nth-child(3){  
+    -webkit-animation:jump 1s linear 0.4s infinite alternate;  
+}  
+
+li.enters i:nth-child(4){  
+    -webkit-animation:jump 1s linear 0.6s infinite alternate;  
+}  
+
+li.enters i:nth-child(5){  
+    -webkit-animation:jump 1s linear 0.8s infinite alternate;  
+}  
+li.enters i:nth-child(6){  
+    -webkit-animation:jump 1s linear 1s infinite alternate;  
+} 
+li.enters i:nth-child(7){  
+    -webkit-animation:jump 1s linear 1.2s infinite alternate;  
+} 
+li.enters i:nth-child(8){  
+    -webkit-animation:jump 1s linear 1.4s infinite alternate;  
+} 
+@-webkit-keyframes jump  
+{  
+    0%{  
+        top:0;  
+        color:#fff;  
+    }  
+    50%{  
+        top:-0.06rem;  
+        color:#fafafa;  
+    }  
+    100%{  
+        top:0.06rem;  
+        color:#f1f1f1;  
+    }  
+}  
+
 .type li.on span{
     background: #fe524e;
     color:#fff;
@@ -126,6 +208,36 @@
     height: 1rem;
     margin-left: 0.08rem;
 }
+.food aside{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.1);
+    z-index: 1099;   
+}
+.food aside content div{
+    width: 50%;
+    height: 50%;
+    margin: 10% auto;
+}
+.food aside content div img{
+    width: 100%;
+    height: 100%;
+}
+.food aside content button{
+    position: absolute;
+    right: 10%;
+    top: 6%;
+    font-size: 0.66rem;
+    background: none;
+    border: 0 none;
+    color: #fff;
+    outline: none;
+}
+
+
 .food .txt{
     -webkit-box-flex:1;
         -ms-flex:1;
@@ -134,7 +246,7 @@
     padding-right: 0;
 }
 .txt .name{
-    font-size: 0.266rem;
+    font-size: 0.222rem;
     color: #222;
     line-height: 1.5em;
     -webkit-box-flex: 1;
