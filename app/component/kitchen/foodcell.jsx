@@ -2,7 +2,7 @@
  * @Author: lzh 
  * @Date: 2017-10-23 14:05:40 
  * @Last Modified by: lzh
- * @Last Modified time: 2017-10-26 12:26:31
+ * @Last Modified time: 2017-10-26 16:41:18
  */
 
 import React from "react";
@@ -57,6 +57,11 @@ class FoodCell extends React.Component{
                 console.log(res);  
                 if(res.data.code === 1){
                     self.loadKitchen(self)
+                    console.log(self.props.socket)
+                    self.props.socket.emit("change-food-state",{
+                        desk: self.props.desk,
+                        text: "change state to 1"
+                    });
                 }
             })
             .catch(function(err){
@@ -81,6 +86,10 @@ class FoodCell extends React.Component{
                 console.log(self.props.arg);  
                 if(res.data.code === 1){
                     self.loadKitchen(self)
+                    self.props.socket.emit("change-food-state",{
+                        desk: self.props.desk,
+                        text: "change state to 2"
+                    });
                 }
             })
             .catch(function(err){

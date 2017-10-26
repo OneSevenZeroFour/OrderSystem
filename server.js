@@ -61,8 +61,12 @@ io.sockets.on("connection", function(socket) {
 		//改变桌子状态
 		console.log("toKitchen", data);
 		io.emit('confirmOrder', data);
+	}).on("change-food-state",function(data) {
+		/* 改变菜品状态（准备中-制作中-上菜） */
+		console.log("change-food-state",data);
+		io.emit('get_order_state',data);
 	});
-	io.emit("get_order_state", "send get");
+	// io.emit("get_order_state", "send get");
 
 })
 
@@ -173,7 +177,7 @@ app.get("/setState", function(req, res) {
 /* 返回未完成的订单 */
 app.get("/kitchen",function(req,res) {
 	res.setHeader("Access-Control-Allow-Origin","*");
-	connection.query("SELECT * FROM userorder",function(err, results, file) {
+	connection.query("SELECT * FROM userorder WHERE state=1",function(err, results, file) {
 		if(err) throw err;
 		var uncompletedData = [];
 		results.forEach(function(item) {
@@ -189,9 +193,7 @@ app.get("/kitchen",function(req,res) {
 				uncompletedData.push(item);
 			}
 		}, this);
-		// var resdata = decodeURI()
-		// console.log(JSON.parse(decodeURI(results[2].content)));
-		// var 
+
 		res.send(JSON.stringify(uncompletedData));
 	});
 });
@@ -234,8 +236,6 @@ app.get("/changeState",function(req,res){
 						reject();
 						return ;
 					}
-					console.log('-----updata------');
-					console.log('affectrow ',suc.affectedRows);
 
 					resolve({
 						foodcont: foodcont,
@@ -266,9 +266,7 @@ app.get("/changeState",function(req,res){
 							inventory: repo.inventory,
 							id: repo.id
 						});
-						console.log(repo)
 					});
-					console.log("91:"+params["name"]);
 				}else if(params["state"] == 2){
 					resolve()
 				}

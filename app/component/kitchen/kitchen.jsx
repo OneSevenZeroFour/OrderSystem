@@ -3,6 +3,10 @@ import TableCell from "./tableCell.jsx";
 import {connect} from "react-redux";
 import "../../../css/kitchen.scss";
 import axios from "axios";
+import io from "socket.io-client";
+
+var socket = io("http://localhost:10002");
+
 class Kitchen extends React.Component{
     constructor(props){
         super(props)
@@ -34,6 +38,12 @@ class Kitchen extends React.Component{
     }
     componentDidMount() {
         this.loadKitchen(this);
+        var self = this;
+        console.log(socket)
+        socket.on("confirmOrder",function(data){
+            console.log(data);
+            this.loadKitchen(self);
+        })
     }
 
     switchTab(ev,idx){
@@ -59,7 +69,6 @@ class Kitchen extends React.Component{
                                 (function(self){
                                     if(self.props["store"]){
                                         return self.props.store.kitchen.map((item, index) => {
-                                            console.log(self)
                                             return (
                                                 <li className={"tableItem"+" "+(self.props.store.currentTab==index?"tableItem-sel":"")} key={index*2} onClick={(e) => { self.switchTab(e,index)}}>
                                                     {item.desk}桌
@@ -78,7 +87,7 @@ class Kitchen extends React.Component{
                                     if(self.props["store"]){
                                         if(self.props.store.kitchen.length > 0){
                                             let item = self.props["store"]["kitchen"][self.props["store"]["currentTab"]];
-                                            return (<TableCell arg={item} tabidx={self.props["store"]["currentTab"]}/>)
+                                            return (<TableCell arg={item} socket={socket} tabidx={self.props["store"]["currentTab"]}/>)
                                         }else{
                                             return (
                                                 <div className="nodata">

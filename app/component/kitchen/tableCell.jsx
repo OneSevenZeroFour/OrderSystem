@@ -2,7 +2,7 @@
  * @Author: lzh 
  * @Date: 2017-10-23 14:05:33 
  * @Last Modified by: lzh
- * @Last Modified time: 2017-10-25 13:57:36
+ * @Last Modified time: 2017-10-26 16:32:31
  */
 import React from "react";
 import FoodCell from "./foodcell.jsx";
@@ -41,7 +41,7 @@ class TableCell extends React.Component{
                                 console.log(arr)
 
                                 return arr.map(function(item, index){
-                                    return <FoodCell tabidx={self.props.tabidx} cellidx={index} arg={item} key={index*2}/>
+                                    return <FoodCell tabidx={self.props.tabidx} desk={self.props.arg.desk} socket={self.props.socket} cellidx={index} arg={item} key={index*2}/>
                                 })
                             })(this)
                         }

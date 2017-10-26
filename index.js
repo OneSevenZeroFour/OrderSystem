@@ -33,7 +33,7 @@ import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
 import Myorder from "./app/component/myorder.jsx";
 import Kitchen from "./app/component/kitchen/kitchen.jsx";
-var socket = io("http://10.3.132.65:10002");
+var socket = io("http://localhost:10002");
 
 function test() {
 	socket.emit("test", {
