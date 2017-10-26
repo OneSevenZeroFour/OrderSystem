@@ -33,7 +33,11 @@ import User from "./app/component/user.jsx";
 import Renter from "./app/component/enter.jsx";
 import Myorder from "./app/component/myorder.jsx";
 import Kitchen from "./app/component/kitchen/kitchen.jsx";
-var socket = io("http://localhost:10002");
+
+import {Xtable} from './app/component/xtable.jsx';
+import {Xtext} from './app/component/xtext.jsx';
+
+var socket = io("http://10.3.132.65:10002");
 
 function test() {
 	socket.emit("test", {
@@ -44,11 +48,15 @@ test();
 var element = (
 	<HashRouter>
 	<Provider store={store}>
-	<div className="ele">
+	<div className="ele" id='box'>
 		<Route exact path="/" component={Renter} />
-		 <Route exact path="/user" component={User} />
-		 <Route exact path="/myorder" component={Myorder} />
-		 <Route exact path="/kitchen" component={Kitchen}/>
+		<Route exact path="/user" component={User} />
+		<Route exact path="/myorder" component={Myorder} />
+		<Route exact path="/kitchen" component={Kitchen}/>
+
+		<Route exact path='/desk' component={Xtable}></Route>
+	    <Route exact path='/desk/foods/:id' component={Xtext}></Route>
+	    
 	</div>
 	</Provider>
 	</HashRouter>

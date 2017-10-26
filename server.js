@@ -61,12 +61,8 @@ io.sockets.on("connection", function(socket) {
 		//改变桌子状态
 		console.log("toKitchen", data);
 		io.emit('confirmOrder', data);
-	}).on("change-food-state",function(data) {
-		/* 改变菜品状态（准备中-制作中-上菜） */
-		console.log("change-food-state",data);
-		io.emit('get_order_state',data);
 	});
-	// io.emit("get_order_state", "send get");
+	io.emit("get_order_state", "send get");
 
 })
 
@@ -107,6 +103,7 @@ app.post('/getMenu', function(req, res) {
 
 });
 
+//-------------------------------------LYH----------------------------------------
 //查询桌子的状态
 app.get("/desk", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
@@ -118,6 +115,7 @@ app.get("/desk", function(req, res) {
 		}));
 	})
 });
+//获取桌子中的菜单
 app.get("/foods", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	connection.query(`select * from userorder where desk='` + req.query.desk + "' and state != '2'", function(err, results, file) {
@@ -128,7 +126,7 @@ app.get("/foods", function(req, res) {
 		}));
 	})
 });
-
+//确认下单
 app.get("/order", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	var sqler = "update userorder set content = '" + req.query.content + "',state = '1' where desk='" + req.query.desk + "' and state = '0'";
@@ -138,18 +136,39 @@ app.get("/order", function(req, res) {
 		res.send('ok');
 	})
 });
-
-app.get("/setPeople", function(req, res) {
+//加菜
+app.get("/addFoods", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "',price = '" + req.query.price + "' where desk='桌号" + req.query.desk + "'";
-	console.log(sqler)
+	var sqler = "update userorder set content = '" + req.query.content + "' where desk='" + req.query.desk + "' and state != '2'";
 	connection.query(sqler, function(err, results, file) {
 		if (err) throw err;
 		// console.log(results);
 		res.send('ok');
 	})
 });
-
+//查询菜式
+app.get("/getFoods", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "select * from diancan where dish_name like '%"+req.query.msg+"%'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send(JSON.stringify({
+			results
+		}));
+	})
+});
+//确认下单后修改desk表
+app.get("/setPeople", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "',price = '" + req.query.price + "' where desk='桌号" + req.query.desk + "'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
+	})
+});
+//修改每桌状态
 app.get("/setStatus", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	if (req.query.status == '可坐') {
@@ -163,7 +182,7 @@ app.get("/setStatus", function(req, res) {
 		res.send('status-ok');
 	})
 });
-
+//结账
 app.get("/setState", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	var sqler = "update userorder set state = '2' where desk='" + req.query.desk + "' and state='1'";
@@ -173,11 +192,31 @@ app.get("/setState", function(req, res) {
 		res.send('state-ok');
 	})
 });
+//修改desk显示的总价和人数
+app.get("/setCount", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update desk set price = '" + req.query.price + "',manys = '" + req.query.num + "' where desk='" + req.query.desk + "'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
+	})
+});
+//修改desk显示的人数
+// app.get("/setKazi", function(req, res) {
+// 	res.setHeader("Access-Control-Allow-Origin", "*");
+// 	var sqler = "update desk set manys = '" + req.query.num + "' where desk='桌号" + req.query.desk + "'";
+// 	connection.query(sqler, function(err, results, file) {
+// 		if (err) throw err;
+// 		// console.log(results);
+// 		res.send('ok');
+// 	})
+// });
 // ============================== LZH start =============================
 /* 返回未完成的订单 */
 app.get("/kitchen",function(req,res) {
 	res.setHeader("Access-Control-Allow-Origin","*");
-	connection.query("SELECT * FROM userorder WHERE state=1",function(err, results, file) {
+	connection.query("SELECT * FROM userorder",function(err, results, file) {
 		if(err) throw err;
 		var uncompletedData = [];
 		results.forEach(function(item) {
@@ -193,7 +232,9 @@ app.get("/kitchen",function(req,res) {
 				uncompletedData.push(item);
 			}
 		}, this);
-
+		// var resdata = decodeURI()
+		// console.log(JSON.parse(decodeURI(results[2].content)));
+		// var 
 		res.send(JSON.stringify(uncompletedData));
 	});
 });
@@ -236,6 +277,8 @@ app.get("/changeState",function(req,res){
 						reject();
 						return ;
 					}
+					console.log('-----updata------');
+					console.log('affectrow ',suc.affectedRows);
 
 					resolve({
 						foodcont: foodcont,
@@ -266,7 +309,9 @@ app.get("/changeState",function(req,res){
 							inventory: repo.inventory,
 							id: repo.id
 						});
+						console.log(repo)
 					});
+					console.log("91:"+params["name"]);
 				}else if(params["state"] == 2){
 					resolve()
 				}

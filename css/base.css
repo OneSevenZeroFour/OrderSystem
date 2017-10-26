@@ -38,8 +38,16 @@ img{
     border:none;
 }
 #demo,.ele{
-    height: 95%;
+    height: 100%;
     overflow-y: auto;
+}
+.clearfix::after{
+    content:'';
+    display: block;
+    clear:both;
+    height:0;
+    visibility: hidden;
+    overflow: hidden;
 }
 @media (min-width:1300px)
 {
