@@ -191,7 +191,7 @@ class Xtext extends React.Component{
 				//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 				$.ajax({
 					type:'get',
-					url:'http://localhost:10002/addFoods',
+					url:'http://10.3.132.65:10002/addFoods',
 					data:{
 						desk:_this.state.num,
 						content:encodeURI(JSON.stringify(res))
@@ -222,7 +222,7 @@ class Xtext extends React.Component{
 				setTimeout(function(){
 					$.ajax({
 						type:'get',
-						url:'http://localhost:10002/getFoods',
+						url:'http://10.3.132.65:10002/getFoods',
 						data:{
 							msg:text
 						},
@@ -313,7 +313,7 @@ class Xtext extends React.Component{
 				var people = $('.people')[0].value==''?0:$('.people')[0].value;
 				$.ajax({
 					type:'get',
-					url:'http://localhost:10002/setCount',
+					url:'http://10.3.132.65:10002/setCount',
 					data:{
 						price:$('.count')[0].innerText.slice(1),
 						desk:'桌号'+_this.state.num,
@@ -326,7 +326,7 @@ class Xtext extends React.Component{
 				console.log(_this.state.foods)
 				$.ajax({
 					type:'get',
-					url:'http://localhost:10002/addFoods',
+					url:'http://10.3.132.65:10002/addFoods',
 					data:{
 						content:encodeURI(JSON.stringify(_this.state.foods)),
 						desk:_this.state.num
