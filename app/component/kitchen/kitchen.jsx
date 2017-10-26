@@ -1,6 +1,7 @@
 import React from "react";
 import TableCell from "./tableCell.jsx";
 import {connect} from "react-redux";
+import "../../../css/kitchen.scss";
 import axios from "axios";
 class Kitchen extends React.Component{
     constructor(props){

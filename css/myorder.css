@@ -1,0 +1,67 @@
+/* 
+* @Author: Marte
+* @Date:   2017-10-24 17:16:31
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-10-24 21:07:37
+*/
+.myorder{
+    display:flex;
+    height: 100%;
+    flex-direction: column;
+}
+.order{
+    flex: 1;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: url(../img/bg/bg4.jpg) repeat #e8e8e8;
+}
+.order .li{
+    height: 0.88rem;
+    padding: 0.12rem 0.5rem;
+    overflow: hidden;
+    border-bottom: 1px dashed #ddd;
+    display: flex;
+    width: 60%;
+    box-sizing: border-box;
+    background: #fafafa;
+    margin: 0 auto;
+    margin-bottom: 0.06rem;
+}
+.order .li header{
+    width: 0.6rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+    overflow: hidden;
+    margin-right: 0.4rem;
+}
+.order .li header img{
+    width: 100%;
+    height: 100%;
+}
+.order .txt{
+    flex:1;
+    display:flex;
+    flex-direction: column;
+}
+.order .state{
+    font-family: "宋体";
+    font-size: 0.18rem;
+    background: #58bc58;
+    align-self: center;
+    color: #f8f8f8;
+    text-align: center;
+    padding: 0.06rem 0.1rem;
+    border-radius: 0.06rem;
+    box-shadow: 0.02rem 0.02rem 0.05rem #555;
+}
+.order .notyet{
+    font-size: 0.22rem;
+    color: #fe524e;
+    text-align: center;
+    width: 100%;
+    margin-top: 30%;
+}
+.order .li .txt .name,.price{
+    font-size: 0.16rem!important;    
+}

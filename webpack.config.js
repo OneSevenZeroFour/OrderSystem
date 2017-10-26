@@ -15,13 +15,14 @@ module.exports = {
 			test: /\.css$/,
 			exclude: /(node_modules)/,
 			loader: "style-loader!css-loader"
-		},
-		{
+		},{
 			test: /\.scss$/,
 			exclude: /(node_modules)/,
 			loader: "style-loader!css-loader!sass-loader"
-		},
-		 {
+		}, {
+			test: /\.(svg|woff|ttf|eot)$/,
+			loader: "file-loader"
+		}, {
 			test: /\.html$/,
 			loader: "html-loader"
 		}, {

@@ -1,5 +1,4 @@
 //服务器文件
-const http = require("http");
 const mysql = require("mysql");
 const express = require("express");
 const url = require("url");
@@ -7,6 +6,9 @@ const querystring = require("querystring");
 const bodyps = require("body-parser");
 // let $ = require("jquery");
 
+var app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 //连接远程数据库 lfp
 var connection = mysql.createConnection({
 	host: "10.3.132.65",
@@ -16,30 +18,159 @@ var connection = mysql.createConnection({
 });
 connection.connect();
 
-var app = express();
+
+
 app.use(bodyps.json());
 app.use(express.static('./'));
 app.use(bodyps.urlencoded({
 	extended: true
 }));
 
-app.get("/submenu", function(req, res) {
-	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.send("its ok")
-});
-//查询座子的状态
-// app.get("/desk", function(req, res) {
-// 	res.setHeader("Access-Control-Allow-Origin", "*");
-// 	connection.query(`select * from desk`, function(err, results, file) {
-// 		if (err) throw err;
-// 		console.log(results);
-// 		res.send(JSON.stringify({
-// 			results	
-// 		}));
-// 	})
-// });
-// [{"name":"凉拌菠菜","num":"1","price":"18"},{"name": "脆藕尖","num": "2","price": "24"}]
 
+var guest_id = [],
+	kitchen_id = "";
+//创建socket服务
+io.sockets.on("connection", function(socket) {
+	console.log("socket已监听")
+	socket.on("send_desk_id_toback", function(data) {
+		guest_id.push(data);
+		console.log('guest', guest_id);
+	}).on("send_order_id_toback", function(data) {
+		//接收订单号与桌子号
+		console.log('aaaa', data)
+		io.emit('toSetDesk', data);
+	}).on("callServer", function(data) {
+		//呼叫服务员
+		console.log("from desk ", data);
+		io.emit('getServer', {
+			status: '呼叫服务',
+			id: data.id
+		})
+	}).on("callToPay", function(data) {
+		//呼叫服务员
+		console.log("pay from desk ", data);
+		io.emit('getServer', {
+			status: '呼叫结账',
+			id: data.id
+		})
+	}).on("setServer", function(data) {
+		//改变桌子状态
+		console.log("desk-status", data);
+		io.emit('getServer', data);
+	}).on("toKitchen", function(data) {
+		//改变桌子状态
+		console.log("toKitchen", data);
+		io.emit('confirmOrder', data);
+	});
+	io.emit("get_order_state", "send get");
+
+})
+
+// ============================== DYT start =============================
+app.post('/getMenu', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body.type;
+	console.log("type:", arg);
+	connection.query('SELECT * from diancan where type="' + arg + '" order by id', function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress));
+	});
+
+}).post('/getType', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * from types order by sorts', function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress));
+	});
+
+}).post('/saveOrder', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body;
+	console.log(arg);
+	connection.query(`insert into userOrder (desk,content,sum,orderTime) values ("${arg.desk}","${encodeURI(arg.txt)}",${arg.pay},"${arg.time}")`, function(err, ress, field) {
+		if (err) throw err;
+		res.send(JSON.stringify(ress.insertId));
+	});
+}).post('/getOrderlist', function(req, res) {
+	res.append("Access-Control-Allow-Origin", "*");
+	var arg = req.body.id;
+	console.log("get order by id", arg);
+	connection.query(`SELECT * from userOrder where desk=${arg} and state!=2`, function(err, ress, field) {
+		if (err) throw err;
+		// console.log(ress[0]);
+		res.send(ress);
+	});
+
+});
+
+//查询桌子的状态
+app.get("/desk", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	connection.query(`select * from desk`, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send(JSON.stringify({
+			results
+		}));
+	})
+});
+app.get("/foods", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	connection.query(`select * from userorder where desk='` + req.query.desk + "' and state != '2'", function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send(JSON.stringify({
+			results
+		}));
+	})
+});
+
+app.get("/order", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update userorder set content = '" + req.query.content + "',state = '1' where desk='" + req.query.desk + "' and state = '0'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
+	})
+});
+
+app.get("/setPeople", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update desk set manys = '" + req.query.num + "',times = '" + req.query.times + "',price = '" + req.query.price + "' where desk='桌号" + req.query.desk + "'";
+	console.log(sqler)
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('ok');
+	})
+});
+
+app.get("/setStatus", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	if (req.query.status == '可坐') {
+		var sqler = "update desk set status = '" + req.query.status + "',manys = 0,price = 0,times = '' where desk='" + req.query.desk + "'";
+	} else {
+		var sqler = "update desk set status = '" + req.query.status + "' where desk='" + req.query.desk + "'";
+	}
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('status-ok');
+	})
+});
+
+app.get("/setState", function(req, res) {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	var sqler = "update userorder set state = '2' where desk='" + req.query.desk + "' and state='1'";
+	connection.query(sqler, function(err, results, file) {
+		if (err) throw err;
+		// console.log(results);
+		res.send('state-ok');
+	})
+});
+// ============================== LZH start =============================
+/* 返回未完成的订单 */
 app.get("/kitchen",function(req,res) {
 	res.setHeader("Access-Control-Allow-Origin","*");
 	connection.query("SELECT * FROM userorder",function(err, results, file) {
@@ -64,6 +195,7 @@ app.get("/kitchen",function(req,res) {
 		res.send(JSON.stringify(uncompletedData));
 	});
 });
+/* 改变菜品状态 */
 app.get("/changeState",function(req,res){
 	res.setHeader("Access-Control-Allow-Origin","*");
 	// 获取url中参数
@@ -88,7 +220,6 @@ app.get("/changeState",function(req,res){
 				});			
 			})	
 		})
-		
 		promise.then(function(resv){
 			return new Promise((resolve,reject) => {
 				/* 前一回调传出的{foodcont: foodcont,state:state} */
@@ -172,48 +303,9 @@ app.get("/changeState",function(req,res){
 					}))
 			console.log("failed: "+reason);
 		})
-	// connection.query(selStr,function(err, results, file){
-	// 	if(err) {
-	// 		console.log("select failed!");
-	// 		/* 若数据库查询失败，返回状态 */
-	// 		/* code属性，1表示成功，0表示失败 */
-	// 		res.send(JSON.stringify({
-	// 			status: "fail",
-	// 			code: 0 								
-	// 		}))
-	// 		return ;
-	// 	};
-	// 	var orderitem = results[0];
-	// 	var foodlist = JSON.parse(decodeURI(orderitem.content));
-	// 	foodlist[params["foodid"]].state = params["state"];
-	// 	/* 修改后的数据 */
-	// 	var foodcont = encodeURI(JSON.stringify(foodlist));
-	// 	/* 更新菜品库存语句 */
-	// 	var repoStr = "SELECT * FROM diancan WHERE name=" + 
-	// 	console.log(params["name"]);
-	// 	/* 更新订单语句 */
-	// 	var updStr = "UPDATE userorder SET content = '" 
-	// 				+ foodcont + "' WHERE id='"
-	// 				+ params["orderid"] + "'";
-
-	// 	connection.query(updStr,function(error,suc){
-	// 		if(error) {
-	// 			console.log("updata failed!");
-	// 			res.send(JSON.stringify({
-	// 				status: "fail",
-	// 				code: 0
-	// 			}))
-	// 			return ;
-	// 		}
-	// 		console.log('-----updata------');
-	// 		console.log('affectrow ',suc.affectedRows);
-	// 		res.send(JSON.stringify({
-	// 			status: "success",
-	// 			code: 1
-	// 		}))
-	// 	});
-	// })
-	
 })
-console.log("Server Is Start!!!");
-app.listen(10002);
+// ============================== LZH end =============================
+/*用http去监听端口 不用express框架监听*/
+server.listen(10002, function() {
+	console.log("Server Is Start!!!");
+});

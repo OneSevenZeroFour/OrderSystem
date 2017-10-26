@@ -27,6 +27,9 @@ li{
 a{
     text-decoration: none;
 }
+a:active{
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 img{
     display: block;
     border:0 none;
@@ -34,7 +37,10 @@ img{
     height: 100%;
     border:none;
 }
-
+#demo,.ele{
+    height: 95%;
+    overflow-y: auto;
+}
 @media (min-width:1300px)
 {
     body, html
