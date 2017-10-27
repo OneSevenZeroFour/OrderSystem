@@ -47,7 +47,7 @@ class Ufooter extends React.Component{
         this.callPay = () => {
             //来结帐啦
             console.log("call to pay");
-            socket.emit("callToPay",{id:this.props.desk});
+            socket.emit("callToPay",{id:window.localStorage.getItem("desk_num")});
         }
 
     }
@@ -76,17 +76,18 @@ class Ufooter extends React.Component{
             //呼叫服务员 每隔3秒 发送一次socket消息
             console.log('callServer');
             this.timer = setInterval(()=>{
-                socket.emit('callServer',{id:this.props.desk});
+                socket.emit('callServer',{id:window.localStorage.getItem("desk_num")});
                 console.log("emit callServer")
-            },3000)
+            },2000)
         }
         //呼叫服务员 30秒自动清除定时器 清除样式(bug)
         this.cleared = ()=>{
             setTimeout(()=>{
                 clearInterval(this.timer);
-                this.refs.service.classList.remove("call_server")
+                this.refs.service.classList.remove("call_server");
+                socket.emit("callOver",{id:window.localStorage.getItem("desk_num"),status:'呼叫服务'})
                 console.log("emit callServer 样式已被清除")
-            },30000)
+            },10000)
         }
     }
     componentWillUnmount(){

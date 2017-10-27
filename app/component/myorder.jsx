@@ -14,11 +14,11 @@ class Myorder extends React.Component{
         }
         this.getList = () => {
             var self = this;
-            if(this.props.desk)
+            if(window.localStorage.getItem("desk_num"))
                 $.ajax({
                     url: 'http://10.3.132.65:10002/getOrderlist',
                     type: 'POST',
-                    data: {id: this.props.desk},
+                    data: {id: window.localStorage.getItem("desk_num")},
                     success:function(data){
                         var arr = [];
                         for(var i=0;i<data.length;i++){
@@ -69,8 +69,9 @@ class Myorder extends React.Component{
         this.getList();
         socket.on("get_order_state",function(data){
             // console.log(data);
-            self.getList();
-        })
+            if(data.desk===self.props.desk)
+                self.getList();
+        });
     }
 }
 

@@ -1,0 +1,179 @@
+/*
+ * @Author: lzh 
+ * @Date: 2017-10-23 10:09:10 
+ * @Last Modified by: lzh
+ * @Last Modified time: 2017-10-26 12:26:58
+ */
+
+/*
+ + 背景色: #eeeeee
+ + 主色: #fe524e
+ + 辅助色: #f78143
+ + 线条能用色: #cccccc #dddddd #d8d8d8;
+ */
+ $bg_color: #eeeeee;
+ $theme_color: #fe524e;
+ $sup_color: #f78143;
+ $bod_color: #ddd;
+
+#kitchen{
+     width: 100%;
+     height: 100%;
+     background-color: $bg_color;
+     display: flex;
+     flex-direction: column;
+     header{
+         height: .84rem;
+         position: relative;
+         z-index: 10;
+         background-color: $theme_color;
+         text-align: center;
+         line-height: .84rem;
+         box-shadow: 0 1px 7px 0px #666;
+        h1{
+            color: #fff;
+            font-size: .30rem;
+            font-weight: 700;
+        }
+     }
+     .kitchen-wrap{
+         flex: 1;
+        //  height: 100%;
+         width: 100%;
+         display: flex;
+     }
+     .kitchen-main{
+         flex: 1;
+        overflow-y: auto;
+     }
+     .kitchen-table{
+         overflow-y: auto;
+        width: 1.6rem;
+        margin-right: .2rem;
+        background-color: #fff;
+     }
+     .main-wrap{
+     }
+}
+
+.tablelist{
+    font-size: .2rem;
+    .tableItem{
+        height: 1rem;
+        text-align: center;
+        line-height: 1rem;
+        border-bottom: 1px solid $bg_color;
+    }
+    // 选中效果
+    .tableItem-sel{
+        background-color: $theme_color;
+        color: #fff;
+    }
+}
+
+.tablecell{
+    border-bottom: 2px solid $bod_color;
+    padding: 10px;
+    .tablecell-wrap{
+    }
+    .table-msg{
+        
+        color: #333;
+        margin-bottom: 10px;
+        .tabletitle{
+            padding-left: .1rem;
+            font-size: .2rem;
+            .titlespan{
+                border-bottom: 2px solid #ddd;
+            }
+        }
+        .orderstate{
+            margin-top: .1rem;
+            color: #666;
+        }
+    }
+    .foodlist{
+    }
+}
+.nodata{
+    width: 100%;
+    height: 80vh;
+    font-size: .30rem;
+    color: #c5c5c5;
+    text-align: center;
+    line-height: 80vh;
+}
+
+.foodcell{
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-bottom: 2px solid $bod_color;
+    overflow: hidden;
+    .cell-wrap{
+        width: 100%;
+        display: flex;
+        .food-icon{
+            padding: .15rem 0 .15rem .15rem;
+            margin-right: .25rem;
+            img{
+                border-radius: 5px;
+                display: block;
+                height: .84rem;
+                width: .84rem;
+            }
+        }
+        .food-msg{
+            flex: 1;
+            padding-top: .05rem;
+            .msg-title{
+                padding-top: .1rem;
+                color: #333;
+                font-size: .24rem; 
+            }
+            .msg-state{
+                padding-top: .2rem;
+                font-size: .20rem;
+                color: #888;
+                .foodnum{
+                    margin-right: .2rem;
+                }
+            }
+        }
+        .food-state{
+            flex: 1;
+            display: flex;
+            font-size: .22rem;
+            color: #fff;
+            text-align: center;
+            align-items: center;
+            margin-right: .2rem;
+            box-sizing: border-box;
+            height: 1.14rem;
+            padding: 10px 0;
+            .stateblock{
+                height: .94rem;
+                flex: 1;   
+                line-height: .94rem;
+                margin-right: 5px;
+                border-radius: 5px;
+            }   
+            .readying{
+                background-color: $sup_color;
+            }
+            .cooking{
+                background-color: #3190E8;
+            }
+            .ordering{
+                background-color: #4CD964;
+            }
+            .unstate{
+                background-color: #ddd !important;
+                color: #aaa !important;
+            }
+        }
+    }
+    .completed-wrap{
+        background-color: #ccc;
+    }
+}

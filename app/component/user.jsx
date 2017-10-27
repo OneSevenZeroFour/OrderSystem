@@ -18,7 +18,7 @@ class User extends React.Component{
             onWhich:0,
             showOrder:false,
             showOrderEnter:true,
-            desk:this.props.desk,
+            desk:window.localStorage.getItem("desk_num"),
             order_id:false,
             zoomImg:false,
             tips_inventory:50,
@@ -30,6 +30,7 @@ class User extends React.Component{
             this.getList($(e.target).html());
         }
         this.getList = (arg)=>{
+            console.log("thisstate",this.state)
             var self = this;
             $.ajax({
                 url: 'http://10.3.132.65:10002/getMenu',
@@ -296,9 +297,11 @@ class User extends React.Component{
         this.getType();
         socket.emit('send_desk_id_toback',this.state.desk);
     }
+
 }
 
 
 export default connect((state)=>{
+    console.log(state);
     return state;//一定要return才能在当前组件拿到store
 })(User);
