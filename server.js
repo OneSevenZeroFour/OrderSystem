@@ -61,9 +61,11 @@ io.sockets.on("connection", function(socket) {
 		//改变桌子状态
 		console.log("toKitchen", data);
 		io.emit('confirmOrder', data);
+	}).on("change-food-state",function(data) {
+		/* 改变菜品状态（准备中-制作中-上菜） */
+		console.log("change-food-state",data);
+		io.emit('get_order_state',data);
 	});
-	io.emit("get_order_state", "send get");
-
 })
 
 // ============================== DYT start =============================
