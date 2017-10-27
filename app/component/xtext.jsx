@@ -198,8 +198,6 @@ class Xtext extends React.Component{
 					},
 					success:function(data){
 						console.log(data);
-						//发送socket到厨房
-						socket.emit('toKitchen','order');
 					}
 				})
 				this.setState({
@@ -310,6 +308,10 @@ class Xtext extends React.Component{
 			var _this = this;
 			// if(this.state.add||this.state.change){
 				//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+				if(this.state.tip){
+				//发送socket到厨房
+					socket.emit('toKitchen','order');
+				}
 				var people = $('.people')[0].value==''?0:$('.people')[0].value;
 				$.ajax({
 					type:'get',
@@ -320,7 +322,7 @@ class Xtext extends React.Component{
 						num:people
 					},
 					success:function(data){
-						location.hash = '#/desk';
+						
 					}
 				})
 				console.log(_this.state.foods)

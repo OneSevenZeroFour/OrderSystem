@@ -48755,8 +48755,6 @@ var Xtext = function (_React$Component) {
 					},
 					success: function success(data) {
 						console.log(data);
-						//发送socket到厨房
-						socket.emit('toKitchen', 'order');
 					}
 				});
 				_this2.setState({
@@ -48864,6 +48862,10 @@ var Xtext = function (_React$Component) {
 			var _this = _this2;
 			// if(this.state.add||this.state.change){
 			//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+			if (_this2.state.tip) {
+				//发送socket到厨房
+				socket.emit('toKitchen', 'order');
+			}
 			var people = $('.people')[0].value == '' ? 0 : $('.people')[0].value;
 			$.ajax({
 				type: 'get',
@@ -48873,9 +48875,7 @@ var Xtext = function (_React$Component) {
 					desk: '桌号' + _this.state.num,
 					num: people
 				},
-				success: function success(data) {
-					location.hash = '#/desk';
-				}
+				success: function success(data) {}
 			});
 			console.log(_this.state.foods);
 			$.ajax({
