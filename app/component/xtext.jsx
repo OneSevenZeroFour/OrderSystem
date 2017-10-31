@@ -357,14 +357,21 @@ class Xtext extends React.Component{
 			// 	location.hash = '#/desk';
 			// }
 		}
+		this.focusInput = (e)=>{
+			e.stopPropagation();
+			this.refs.foot_list.style.display = "block";
+		}
+		this.lostInput = (e)=>{
+			this.refs.foot_list.style.display = "none";
+		}
 	}
 	render(){
 		var _this = this;
-		return <div className='foot clearfix'>
-			<h4><a onClick={this.count}>〈</a>相遇湘味馆</h4>
-			<p>桌号<span>{this.state.num}</span></p>
+		return <div className='foot clearfix' onClick={this.lostInput}>
+			<header><h4><a herf="javascript:;"onClick={this.count}>〈</a>遇见湘味馆</h4></header>
+			<div className="desk_id"><p>桌号<span>{this.state.num}</span></p></div>
 			<ul onClick={this.changeNum}>
-				<li><span>菜名</span><span>数量</span><span>价格</span></li>
+				<li><span>菜&nbsp;&nbsp;名</span><span>数&nbsp;&nbsp;量</span><span>价&nbsp;&nbsp;格</span></li>
 				{
 					this.state.foods.map(function(item,idx){
 						return <li key={idx}>
@@ -375,9 +382,9 @@ class Xtext extends React.Component{
 							</li>
 					})
 				}
-				<li><span>茶位</span><span><input onChange={this.setNum} value={this.state.pri?this.state.pri:''} className='people'/></span><span>￥{this.state.pri*2}</span></li>
+				<li><span>茶&nbsp;&nbsp;位</span><span><input onChange={this.setNum} value={this.state.pri?this.state.pri:''} className='people'/></span><span>￥{this.state.pri*2}</span></li>
 			</ul>
-			<div onClick={this.addCai}>加菜{this.state.add?<input type='text' className='mmp' onChange={this.shit} />:''}<ul>{
+			<div onClick={this.addCai}><span className="add_foot">加&nbsp;&nbsp;菜:</span>{this.state.add?<input type='text' placeholder="请输入菜名" className='mmp' onChange={this.shit} onClick={this.focusInput}/>:''}<ul ref="foot_list">{
 				(function(){
 					if(_this.state.select.length>0){
 						return _this.state.select.map(function(item){
@@ -386,7 +393,7 @@ class Xtext extends React.Component{
 					}
 				})()
 			}</ul>{this.state.show?<button>添加</button>:''}</div>
-			<p>总价:<span className='count'>￥{_this.state.sum}</span></p>
+			<h5>总&nbsp;&nbsp;价:<span className='count'>￥{_this.state.sum}</span></h5>
 			<p>下单时间: <span>{this.state.time}</span></p>
 			{
 				!this.state.state?<button onClick={this.toOk} className='start'>确认下单</button>:<button onClick={this.toOver} className='over'>结账</button>
@@ -454,7 +461,8 @@ class Xtext extends React.Component{
 		})
 	}
 	componentDidMount(){
-
+		// console.log($('.mmp'))
+		// this.lostInput();
 	}
 }
 

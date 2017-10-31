@@ -19,7 +19,7 @@ class FoodCell extends React.Component{
         this.loadKitchen = this.loadKitchen.bind(this);
     }
     loadKitchen(self){
-        axios.get("http://localhost:10002/kitchen")
+        axios.get("http://10.3.132.65:10002/kitchen")
             .then(function(res){
                 console.log(res);
                 var curtab = 0;
@@ -44,7 +44,7 @@ class FoodCell extends React.Component{
         ev.preventDefault();
         if(this.props.arg.state == 0){
             let self = this;
-            axios.get("http://localhost:10002/changeState",{
+            axios.get("http://10.3.132.65:10002/changeState",{
                 params:{
                     orderid: self.props.store.kitchen[self.props.tabidx].id,
                     foodid: self.props.cellidx,
@@ -75,7 +75,7 @@ class FoodCell extends React.Component{
         ev.preventDefault();
         if(this.props.arg.state == 1){
             let self = this;
-            axios.get("http://localhost:10002/changeState",{
+            axios.get("http://10.3.132.65:10002/changeState",{
                 params:{
                     orderid: self.props.store.kitchen[self.props.tabidx].id,
                     foodid: self.props.cellidx,

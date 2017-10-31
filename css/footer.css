@@ -42,15 +42,25 @@ footer .foot_menu li:nth-of-type(2) a i.call_server{
 @-webkit-keyframes rock  
 {  
     0%{  
+        transform: rotate(24deg); 
+    } 
+    25%{
+        transform: rotate(12deg); 
+    }
+    50%{
         transform: rotate(0deg); 
-    }  
-    50%{  
-        transform: rotate(24deg);   
-    }  
+    } 
+    75%{
+        transform: rotate(-12deg); 
+    }
     100%{  
         transform: rotate(-24deg);  
     }  
 }  
+
+
+
+
 
 footer .foot_menu li i{
     display: block;

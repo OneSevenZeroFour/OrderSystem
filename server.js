@@ -230,7 +230,7 @@ app.get("/setCount", function(req, res) {
 /* 返回未完成的订单 */
 app.get("/kitchen", function(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	connection.query("SELECT * FROM userorder", function(err, results, file) {
+	connection.query("SELECT * FROM userorder WHERE state=1", function(err, results, file) {
 		if (err) throw err;
 		var uncompletedData = [];
 		results.forEach(function(item) {

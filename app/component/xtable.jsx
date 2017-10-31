@@ -69,9 +69,9 @@ class Xtable extends React.Component{
 					var url = item.id + '&' + item.manys;
 					return <a key={item.id} onClick={_this.toFoods} data-id={item.id} data-num={item.manys?item.manys:'null'}>
 						<h4>大厅{item.desk.slice(2)}号桌</h4>
-						<p>人数:<span>{item.manys!=0?item.manys:''}</span></p>
-						<p>下单时间:<span>{item.times?item.times:''}</span></p>
+						<p>客人数:<span>{item.manys!=0?item.manys:''}</span></p>
 						<p>总价:<span>{item.price?'￥'+item.price:''}</span></p>
+						<p>下单时间:<span>{item.times?item.times:''}</span></p>
 						<p>状态:<span style={
 								(function(){
 									if(item.status=='可坐'){
@@ -158,7 +158,7 @@ class Xtable extends React.Component{
 			_this.setState({
 				table:res,
 				voice:true,
-				switcher:"http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=4&text="+data.id+"号座需要服务"				
+				switcher:"http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=4&text="+data.id+"号桌需要服务"				
 			})
 		})
 		socket.on('get_callOver',function(data){

@@ -7756,13 +7756,26 @@ var Ufooter = function (_React$Component) {
         };
         _this.change_bg = function (e) {
             var idx = e.target.dataset.idx;
-            if (idx == 0 || idx == 2 && _this.state.haso) _this.props.dispatch({ type: "changebg", bg_num: idx });
-            _this.setState(Object.assign({}, _this.state, {
-                bg_num: idx
-            }));
-            if (idx == 1) _this.callServer();
-            _this.cleared();
-            if (idx == 3) _this.callPay();
+            if (idx == 0 || idx == 2 && _this.state.haso) {
+                _this.props.dispatch({ type: "changebg", bg_num: idx });
+                _this.setState(Object.assign({}, _this.state, {
+                    bg_num: idx
+                }));
+            };
+            if (idx == 1) {
+                console.log(_this);
+                _this.setState(Object.assign({}, _this.state, {
+                    bg_num: idx
+                }));
+                _this.callServer();
+                _this.cleared();
+            };
+            if (idx == 3) {
+                _this.setState(Object.assign({}, _this.state, {
+                    bg_num: idx
+                }));
+                _this.callPay();
+            };
         };
         _this.callPay = function () {
             //来结帐啦
@@ -7806,6 +7819,7 @@ var Ufooter = function (_React$Component) {
             this.callServer = function () {
                 //呼叫服务员 每隔3秒 发送一次socket消息
                 console.log('callServer');
+                _this2.refs.service.classList.add("call_server");
                 _this2.timer = setInterval(function () {
                     socket.emit('callServer', { id: window.localStorage.getItem("desk_num") });
                     console.log("emit callServer");
@@ -46454,7 +46468,7 @@ exports = module.exports = __webpack_require__(8)(undefined);
 
 
 // module
-exports.push([module.i, "/** \r\n * 菜单脚部 样式\r\n * by lfp\r\n */\r\nfooter .foot_menu{\r\n    width: 100%;\r\n    height: 0.688rem;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    line-height: 0.688rem;\r\n    background: #585858;\r\n    -ms-flex-pack: distribute;\r\n    justify-content: space-around;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\t\r\n}\r\nfooter .foot_menu li{\r\n\twidth: 100%;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    -ms-flex-flow: column;\r\n    flex-flow: column;\r\n    text-align: center;\t\r\n    -webkit-box-sizing: border-box;\t\r\n    box-sizing: border-box;\r\n    border-right: 1px solid #f8f8f8;            \r\n    overflow: hidden;\r\n}\r\nfooter .foot_menu li:last-child{\r\n\tborder: 0 none;\r\n}\r\nfooter .foot_menu li:nth-of-type(2) a i{\r\n    transform-origin: 100% 50%;\r\n}\r\nfooter .foot_menu li:nth-of-type(2) a i.call_server{\r\n    -webkit-animation:rock 1s linear 1.4s infinite alternate; \r\n}\r\n@-webkit-keyframes rock  \r\n{  \r\n    0%{  \r\n        transform: rotate(0deg); \r\n    }  \r\n    50%{  \r\n        transform: rotate(24deg);   \r\n    }  \r\n    100%{  \r\n        transform: rotate(-24deg);  \r\n    }  \r\n}  \r\n\r\nfooter .foot_menu li i{\r\n    display: block;\r\n    font-size: 0.288rem;\r\n    vertical-align: middle;\r\n    width: 0.1rem;\r\n    height: 0.1rem;\r\n    margin: 0 auto;\r\n    margin-bottom: 0.14rem;\r\n    transform: translate(-100%);\r\n    margin-top: -0.1rem;\r\n}\r\nfooter .foot_menu li a{\r\n    display: block;\r\n    font-size: 0.164rem;\r\n    color: #fff;\t\r\n    transition: 0.3s linear;\r\n}\r\nfooter .foot_menu li a.active_bg{\r\n    background: #fe524e;\t\r\n    transition: 0.3s linear;\r\n}", ""]);
+exports.push([module.i, "/** \r\n * 菜单脚部 样式\r\n * by lfp\r\n */\r\nfooter .foot_menu{\r\n    width: 100%;\r\n    height: 0.688rem;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    line-height: 0.688rem;\r\n    background: #585858;\r\n    -ms-flex-pack: distribute;\r\n    justify-content: space-around;\r\n    -webkit-box-sizing: border-box;\r\n    box-sizing: border-box;\t\r\n}\r\nfooter .foot_menu li{\r\n\twidth: 100%;\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-orient: vertical;\r\n    -webkit-box-direction: normal;\r\n    -ms-flex-flow: column;\r\n    flex-flow: column;\r\n    text-align: center;\t\r\n    -webkit-box-sizing: border-box;\t\r\n    box-sizing: border-box;\r\n    border-right: 1px solid #f8f8f8;            \r\n    overflow: hidden;\r\n}\r\nfooter .foot_menu li:last-child{\r\n\tborder: 0 none;\r\n}\r\nfooter .foot_menu li:nth-of-type(2) a i{\r\n    transform-origin: 100% 50%;\r\n}\r\nfooter .foot_menu li:nth-of-type(2) a i.call_server{\r\n    -webkit-animation:rock 1s linear 1.4s infinite alternate; \r\n}\r\n@-webkit-keyframes rock  \r\n{  \r\n    0%{  \r\n        transform: rotate(24deg); \r\n    } \r\n    25%{\r\n        transform: rotate(12deg); \r\n    }\r\n    50%{\r\n        transform: rotate(0deg); \r\n    } \r\n    75%{\r\n        transform: rotate(-12deg); \r\n    }\r\n    100%{  \r\n        transform: rotate(-24deg);  \r\n    }  \r\n}  \r\n\r\n\r\n\r\n\r\n\r\nfooter .foot_menu li i{\r\n    display: block;\r\n    font-size: 0.288rem;\r\n    vertical-align: middle;\r\n    width: 0.1rem;\r\n    height: 0.1rem;\r\n    margin: 0 auto;\r\n    margin-bottom: 0.14rem;\r\n    transform: translate(-100%);\r\n    margin-top: -0.1rem;\r\n}\r\nfooter .foot_menu li a{\r\n    display: block;\r\n    font-size: 0.164rem;\r\n    color: #fff;\t\r\n    transition: 0.3s linear;\r\n}\r\nfooter .foot_menu li a.active_bg{\r\n    background: #fe524e;\t\r\n    transition: 0.3s linear;\r\n}", ""]);
 
 // exports
 
@@ -47336,7 +47350,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var socket = (0, _socket2.default)("http://localhost:10002");
+var socket = (0, _socket2.default)("http://10.3.132.65:10002");
 
 var Kitchen = function (_React$Component) {
     _inherits(Kitchen, _React$Component);
@@ -47357,7 +47371,7 @@ var Kitchen = function (_React$Component) {
     _createClass(Kitchen, [{
         key: "loadKitchen",
         value: function loadKitchen(self) {
-            _axios2.default.get("http://localhost:10002/kitchen").then(function (res) {
+            _axios2.default.get("http://10.3.132.65:10002/kitchen").then(function (res) {
                 console.log(res);
                 var curtab = 0;
                 // console.log(self.props.store);
@@ -47653,7 +47667,7 @@ var FoodCell = function (_React$Component) {
     _createClass(FoodCell, [{
         key: "loadKitchen",
         value: function loadKitchen(self) {
-            _axios2.default.get("http://localhost:10002/kitchen").then(function (res) {
+            _axios2.default.get("http://10.3.132.65:10002/kitchen").then(function (res) {
                 console.log(res);
                 var curtab = 0;
                 if (self.props.store) {
@@ -47678,7 +47692,7 @@ var FoodCell = function (_React$Component) {
             ev.preventDefault();
             if (this.props.arg.state == 0) {
                 var self = this;
-                _axios2.default.get("http://localhost:10002/changeState", {
+                _axios2.default.get("http://10.3.132.65:10002/changeState", {
                     params: {
                         orderid: self.props.store.kitchen[self.props.tabidx].id,
                         foodid: self.props.cellidx,
@@ -47707,7 +47721,7 @@ var FoodCell = function (_React$Component) {
             ev.preventDefault();
             if (this.props.arg.state == 1) {
                 var self = this;
-                _axios2.default.get("http://localhost:10002/changeState", {
+                _axios2.default.get("http://10.3.132.65:10002/changeState", {
                     params: {
                         orderid: self.props.store.kitchen[self.props.tabidx].id,
                         foodid: self.props.cellidx,
@@ -48867,21 +48881,11 @@ var Xtable = function (_React$Component) {
 						_react2.default.createElement(
 							'p',
 							null,
-							'\u4EBA\u6570:',
+							'\u5BA2\u4EBA\u6570:',
 							_react2.default.createElement(
 								'span',
 								null,
 								item.manys != 0 ? item.manys : ''
-							)
-						),
-						_react2.default.createElement(
-							'p',
-							null,
-							'\u4E0B\u5355\u65F6\u95F4:',
-							_react2.default.createElement(
-								'span',
-								null,
-								item.times ? item.times : ''
 							)
 						),
 						_react2.default.createElement(
@@ -48892,6 +48896,16 @@ var Xtable = function (_React$Component) {
 								'span',
 								null,
 								item.price ? '￥' + item.price : ''
+							)
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'\u4E0B\u5355\u65F6\u95F4:',
+							_react2.default.createElement(
+								'span',
+								null,
+								item.times ? item.times : ''
 							)
 						),
 						_react2.default.createElement(
@@ -48984,7 +48998,7 @@ var Xtable = function (_React$Component) {
 				_this.setState({
 					table: res,
 					voice: true,
-					switcher: "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=4&text=" + data.id + "号座需要服务"
+					switcher: "http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=4&text=" + data.id + "号桌需要服务"
 				});
 			});
 			socket.on('get_callOver', function (data) {
@@ -49050,7 +49064,7 @@ exports = module.exports = __webpack_require__(8)(undefined);
 
 
 // module
-exports.push([module.i, ".table{\r\n\theight:100%;\r\n\toverflow:hidden;\r\n\tbackground:#fff;\r\n}\r\n.table>a{\r\n\tcolor:#fe524e;\r\n\tdisplay:block;\r\n\tpadding:.2rem 0.1rem;\r\n\tfloat:left;\r\n\twidth:25%;\r\n\theight:25%;\r\n\tbox-sizing:border-box;\r\n\tborder-right:1px solid #ccc;\r\n\tborder-bottom:1px solid #ccc;\r\n}\r\n.table h4{\r\n\tfont-size:.18rem;\r\n    border-bottom: 0.01rem solid #333;\r\n    text-align: center;\t\r\n}\r\n.table p{\r\n\tmargin-top:.1rem;\r\n\tfont-size:.166rem;\r\n\tcolor:#666;\r\n}\r\n.table p span{\r\n\tfloat:right;\r\n\tfont-weight:600;\r\n}\r\n.table p:nth-child(2) span{\r\n\tcolor:#333;\r\n}\r\n.table p:nth-child(3) span{\r\n\tcolor: #888;\r\n    font-size: 0.133rem;\r\n    padding-top: 0.04rem;\r\n    text-decoration: underline;\r\n}\r\n.table p:nth-child(4) span{\r\n\tcolor:#CD0000;\r\n}", ""]);
+exports.push([module.i, ".table{\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-flow: wrap;\r\n    background: #fafafa;\r\n    box-sizing: border-box;\r\n}\r\n.table>a{\r\n    display: block;\r\n    padding: .1rem 0.06rem;\r\n    color: #fe524e;\r\n    float: left;\r\n    width: 22%;\r\n    height: 25%;\r\n    border: 1px solid #ccc;\r\n    -webkit-box-sizing: border-box;\r\n            box-sizing: border-box;\r\n    margin: 0.04rem 0.1rem;\r\n    background: #fff;\r\n}\r\n.table h4{\r\n\tfont-size:.14rem;\r\n    border-bottom: 0.01rem solid #333;\r\n    text-align: center;\r\n\tbackground: #569CFF;\r\n    color: #fff;    \t\r\n}\r\n.table p{\r\n\tmargin-top:.1rem;\r\n\tfont-size:.122rem;\r\n\tcolor:#666;\r\n}\r\n.table p:last-child{\r\n    border-bottom: 0.01rem solid #ddd;\t\r\n}\r\n.table p span{\r\n\tfloat:right;\r\n\tfont-weight:600;\r\n}\r\n.table p:nth-child(2) span{\r\n\tcolor:#333;\r\n}\r\n.table p:nth-child(3) span{\r\n\tcolor: #888;\r\n    font-size: 0.133rem;\r\n    padding-top: 0.04rem;\r\n    text-decoration: underline;\r\n}\r\n.table p:nth-child(4) span{\r\n\tcolor:#CD0000;\r\n}", ""]);
 
 // exports
 
@@ -49441,6 +49455,13 @@ var Xtext = function (_React$Component) {
 			// 	location.hash = '#/desk';
 			// }
 		};
+		_this2.focusInput = function (e) {
+			e.stopPropagation();
+			_this2.refs.foot_list.style.display = "block";
+		};
+		_this2.lostInput = function (e) {
+			_this2.refs.foot_list.style.display = "none";
+		};
 		return _this2;
 	}
 
@@ -49450,25 +49471,33 @@ var Xtext = function (_React$Component) {
 			var _this = this;
 			return _react2.default.createElement(
 				'div',
-				{ className: 'foot clearfix' },
+				{ className: 'foot clearfix', onClick: this.lostInput },
 				_react2.default.createElement(
-					'h4',
+					'header',
 					null,
 					_react2.default.createElement(
-						'a',
-						{ onClick: this.count },
-						'\u3008'
-					),
-					'\u76F8\u9047\u6E58\u5473\u9986'
+						'h4',
+						null,
+						_react2.default.createElement(
+							'a',
+							{ herf: 'javascript:;', onClick: this.count },
+							'\u3008'
+						),
+						'\u9047\u89C1\u6E58\u5473\u9986'
+					)
 				),
 				_react2.default.createElement(
-					'p',
-					null,
-					'\u684C\u53F7',
+					'div',
+					{ className: 'desk_id' },
 					_react2.default.createElement(
-						'span',
+						'p',
 						null,
-						this.state.num
+						'\u684C\u53F7',
+						_react2.default.createElement(
+							'span',
+							null,
+							this.state.num
+						)
 					)
 				),
 				_react2.default.createElement(
@@ -49480,17 +49509,17 @@ var Xtext = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							'\u83DC\u540D'
+							'\u83DC\xA0\xA0\u540D'
 						),
 						_react2.default.createElement(
 							'span',
 							null,
-							'\u6570\u91CF'
+							'\u6570\xA0\xA0\u91CF'
 						),
 						_react2.default.createElement(
 							'span',
 							null,
-							'\u4EF7\u683C'
+							'\u4EF7\xA0\xA0\u683C'
 						)
 					),
 					this.state.foods.map(function (item, idx) {
@@ -49540,7 +49569,7 @@ var Xtext = function (_React$Component) {
 						_react2.default.createElement(
 							'span',
 							null,
-							'\u8336\u4F4D'
+							'\u8336\xA0\xA0\u4F4D'
 						),
 						_react2.default.createElement(
 							'span',
@@ -49558,11 +49587,15 @@ var Xtext = function (_React$Component) {
 				_react2.default.createElement(
 					'div',
 					{ onClick: this.addCai },
-					'\u52A0\u83DC',
-					this.state.add ? _react2.default.createElement('input', { type: 'text', className: 'mmp', onChange: this.shit }) : '',
+					_react2.default.createElement(
+						'span',
+						{ className: 'add_foot' },
+						'\u52A0\xA0\xA0\u83DC:'
+					),
+					this.state.add ? _react2.default.createElement('input', { type: 'text', placeholder: '\u8BF7\u8F93\u5165\u83DC\u540D', className: 'mmp', onChange: this.shit, onClick: this.focusInput }) : '',
 					_react2.default.createElement(
 						'ul',
-						null,
+						{ ref: 'foot_list' },
 						function () {
 							if (_this.state.select.length > 0) {
 								return _this.state.select.map(function (item) {
@@ -49592,9 +49625,9 @@ var Xtext = function (_React$Component) {
 					) : ''
 				),
 				_react2.default.createElement(
-					'p',
+					'h5',
 					null,
-					'\u603B\u4EF7:',
+					'\u603B\xA0\xA0\u4EF7:',
 					_react2.default.createElement(
 						'span',
 						{ className: 'count' },
@@ -49701,7 +49734,10 @@ var Xtext = function (_React$Component) {
 		}
 	}, {
 		key: 'componentDidMount',
-		value: function componentDidMount() {}
+		value: function componentDidMount() {
+			// console.log($('.mmp'))
+			// this.lostInput();
+		}
 	}]);
 
 	return Xtext;
@@ -49749,7 +49785,7 @@ exports = module.exports = __webpack_require__(8)(undefined);
 
 
 // module
-exports.push([module.i, ".foot{\r\n\theight:100%;\r\n\tbackground:#fff;\r\n}\r\n.foot>h4{\r\n\tcolor: #fe524e;\r\n    letter-spacing: .16rem;\r\n    font-size: .28rem;\r\n    text-align: center;\r\n    padding: .1rem 0;\r\n    border-bottom: 1px solid #333;\r\n    margin: 0 2rem;\r\n    position:relative;\r\n}\r\n.foot>h4 a{\r\n\tposition:absolute;\r\n\tleft:-1.8rem;\r\n\tcolor:#A52A2A;\r\n\tfont-weight:600;\r\n}\r\n.foot>p{\r\n\tpadding: .1rem .3rem;\r\n    font-size: .22rem;\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: left;\r\n    line-height: 0.422rem;\r\n    height: 0.422rem;\r\n}\r\n.foot>p:nth-child(2) span{\r\n    float: right;\r\n    color: #000;\r\n    font-weight: 600;\r\n    font-size: .26rem;\r\n    vertical-align: middle;\r\n    margin-right: 0.222rem;\r\n    background: #fff;\r\n    border: 1px solid #333;\r\n    border-radius: 50%;\r\n    display: block;\r\n    width: 0.444rem;\r\n    height: 0.444rem;\r\n    line-height: 0.444rem;\r\n    text-align: center;\r\n}\r\n.foot>ul{\r\n\tpadding:0 .3rem;\r\n\tfont-size:.2rem;\r\n}\r\n.foot>ul li{\r\n\tfont-size:.18rem;\r\n\tdisplay:block;\r\n\toverflow:hidden;\r\n    position:relative;\r\n}\r\n.foot>ul li button{\r\n    position:absolute;\r\n    top:.2rem;\r\n    right:.2rem;\r\n    border:0 none;\r\n    font-size: .2rem;\r\n    height:.2rem;\r\n    line-height: .2rem;\r\n    background: none;\r\n    outline:none;\r\n    color:#999;\r\n}\r\n.foot ul:frist-child(1) li{\r\n    font-size: 0.2444rem;\r\n    font-weight: 600;\t\r\n}\r\n.foot ul li:last-child span:nth-of-type(2){\r\n\tpadding:0;\r\n}\r\n.foot>ul li span{\r\n\tcolor:#333;\r\n\tdisplay:block;\r\n\tfloat:left;\r\n\twidth:25%;\r\n\tpadding:.16rem 0;\r\n\tborder-bottom:1px solid #ccc;\r\n}\r\n.foot>ul li span:nth-child(1){\r\n\twidth:50%;\r\n}\r\n.foot>ul li span i{\r\n\tfont-style:normal;\r\n\tdisplay:inline-block;\r\n\twidth:.2rem;\r\n\theight:.2rem;\r\n\tborder:1px solid #ccc;\r\n\ttext-align:center;\r\n\tline-height:.2rem;\r\n}\r\n.foot>ul li span i:nth-child(2){\r\n\tborder:0 none;\r\n\tmargin:0 .1rem;\r\n}\r\n.foot>ul li span input{\r\n\toutline:none;\r\n    width: 0.88rem;\r\n    outline: none;\r\n    text-align: center;\r\n    border: 0 none;\r\n    height: 0.358rem;\r\n    font-size: 0.2rem;\r\n    margin: 0.1rem 0;\r\n    background: #f8f8f8;\t\r\n}\r\n.foot>div:nth-child(4){\r\n    position:relative;\r\n    /*display: inline-block;*/\r\n    padding: .1rem .3rem;\r\n    font-size: .22rem;\r\n    text-align: left;\r\n    line-height: 0.422rem;\r\n    height: 0.422rem;\r\n\tfont-size:.2rem;\r\n\tcolor:#f00;\r\n\tfont-weight:600;\r\n}\r\n.foot>div:nth-child(4) input{\r\n    box-sizing:border-box;\r\n    width:6rem;\r\n    height:.36rem;\r\n    border:0 none;\r\n    outline:none;\r\n    background: #ddd;\r\n    margin-left:.3rem;\r\n    font-size: .2rem;\r\n    padding-left:.1rem;\r\n}\r\n.foot>div:nth-child(4) ul{\r\n    margin-top:-3px;\r\n    width:6rem;\r\n    position:absolute;\r\n    box-sizing:border-box;\r\n    left:1rem;\r\n    /*background: rgba(255,255,255,.7)*/\r\n    background: #fff;\r\n    border:1px solid #ccc;\r\n    border-top:0 none;\r\n}\r\n.foot>div:nth-child(4) ul li{\r\n    padding-left:.1rem;\r\n    box-sizing:border-box;\r\n    width:100%;\r\n}\r\n.foot>div:nth-child(4) ul li span:first-child{\r\n    color:#333;\r\n    font-weight:100;\r\n}\r\n.foot>div:nth-child(4) ul li span:last-child{\r\n    color:#333;\r\n    float:right;\r\n    margin-right:.1rem;\r\n    font-weight:100;\r\n    color:#f00;\r\n}\r\n.foot>div:nth-child(4) button{\r\n    position:absolute;\r\n    right:2.3rem;\r\n    border:0 none;\r\n    outline: none;\r\n    background: none;\r\n    font-size: .2rem;\r\n    line-height: .4rem;\r\n    color:#58bc58;\r\n}\r\n.foot>p:nth-child(5){\r\n    text-align: right;\r\n    background: #fafafa;\r\n    margin-top: 0.1rem;\r\n}\r\n.foot>p:nth-child(5) span{\r\n    color: #f00;\r\n    font-size: .26rem;\r\n    font-weight: 600;\r\n    padding-left: 1.22rem;\r\n    text-align: right;\r\n}\r\n.foot>p:nth-child(6){\r\n\tfloat:left;\r\n    padding-bottom:.4rem;\r\n}\r\n.foot>p:nth-child(6) span{\r\n    font-size: 0.2rem;\r\n    color: #666;\r\n    padding-left: 0.4rem;\r\n    font-style: italic;\t\r\n}\r\n.foot>button:nth-child(7){\r\n    float: right;\r\n    font-size: .2666rem;\r\n    padding: .1rem .4rem;\r\n    color: #fff;\r\n    outline: none;\r\n    border: 0 none;\r\n    margin-right: .3rem;\r\n    box-shadow: 0.04rem 0.04rem 0.08rem #333;\r\n    border-radius: 0.04rem;\r\n    margin-top: 0.06rem;\r\n}\r\n.foot .start{\r\n\tbackground:#58bc58;\r\n}\r\n.foot .over{\r\n\tbackground:#CD0000;\r\n}\r\n.foot .conf{\r\n\tleft:50%;\r\n\ttop:50%;\r\n\ttransform:translate(-50%,-50%);\r\n\tposition:fixed;\r\n\twidth:40%;\r\n\theight:24%;\r\n\tbackground:#f2f2f2;\r\n}\r\n.foot h4{\r\n\tcolor: #fe524e;\r\n    letter-spacing: .16rem;\r\n    font-size: .28rem;\r\n    text-align: center;\r\n    padding: .1rem 0;\r\n}\r\n.foot .conf div{\r\n\tmargin-top:.5rem;\r\n\tdisplay:flex;\r\n\tjustify-content:space-between;\r\n\tpadding:0 .3rem;\r\n}\r\n.foot .conf span{\r\n\tfont-size:.18rem;\r\n\tborder:1px solid #ccc;\r\n\tpadding:.14rem .26rem;\r\n\tfont-weight:600;\r\n    color:#fff;\r\n    font-weight:600;\r\n    border-radius: .08rem;\r\n}\r\n.foot .conf span:first-child{\r\n    background: #58bc58;\r\n}\r\n.foot .conf span:last-child{\r\n    background: #f00;\r\n}", ""]);
+exports.push([module.i, ".foot{\r\n\theight:100%;\r\n\tbackground:#fff;\r\n}\r\n.foot header{\r\n    background: #fe524e;\r\n}\r\n.foot header h4{\r\n    color: #fff;\r\n    letter-spacing: .16rem;\r\n    font-size: .22rem;\r\n    text-align: center;\r\n    padding: .1rem 0;\r\n    margin: 0 2rem;\r\n    position: relative;\r\n}\r\n.foot header h4 a{\r\n    position: absolute;\r\n    left: -1.68rem;\r\n    color: #fff;\r\n    font-weight: 600;\r\n}\r\n.foot>p{\r\n    padding: .1rem .3rem;\r\n    font-size: .12rem;\r\n    overflow: hidden;\r\n    vertical-align: middle;\r\n    text-align: left;\r\n    line-height: 0.222rem;\r\n    height: 0.222rem;\r\n}\r\n.foot .desk_id{\r\n     background: #fafafa;   \r\n}\r\n.foot .desk_id p{\r\n    padding: 0.06rem .3rem;\r\n    font-size: .16rem;\r\n    overflow: hidden;\r\n    line-height: 0.34rem;\r\n    height: 0.34rem;\r\n}\r\n.foot .desk_id p span{\r\nfloat: right;\r\n    background: #1075FF;\r\n    font-weight: 600;\r\n    font-size: .18rem;\r\n    vertical-align: middle;\r\n    margin-right: 0.222rem;\r\n    border-radius: 50%;\r\n    display: block;\r\n    width: 0.28rem;\r\n    height: 0.28rem;\r\n    line-height: 0.28rem;\r\n    text-align: center;\r\n    color: #fff;\r\n}\r\n.foot>ul{\r\n\tpadding:0 1.2rem;\r\n\tfont-size:.2rem;\r\n}\r\n.foot>ul li{\r\n\tfont-size:.18rem;\r\n\tdisplay:block;\r\n\toverflow:hidden;\r\n    position:relative;\r\n}\r\n.foot>ul li button{\r\n    position: absolute;\r\n    top: 0.04rem;\r\n    right: .2rem;\r\n    font-size: .16rem;\r\n    background: none;\r\n    outline: none;\r\n    color: #999;\r\n    border: 0.01rem solid #ddd;\r\n    padding: 0.04rem 0.1rem;\r\n    border-radius: 0.04rem;\r\n}\r\n.foot ul:frist-child(1) li{\r\n    font-size: 0.2444rem;\r\n    font-weight: 600;\t\r\n}\r\n.foot ul li:last-child span:nth-of-type(2){\r\n\tpadding:0;\r\n}\r\n.foot>ul li span{\r\n\tcolor:#333;\r\n\tdisplay:block;\r\n\tfloat:left;\r\n\twidth:25%;\r\n\tpadding:0.08rem 0;\r\n\tborder-bottom:1px solid #ccc;\r\n}\r\n.foot>ul li span:nth-child(1){\r\n\twidth:50%;\r\n}\r\n.foot>ul li span i{\r\n\tfont-style:normal;\r\n\tdisplay:inline-block;\r\n\twidth:.2rem;\r\n\theight:.2rem;\r\n\tborder:1px solid #ccc;\r\n\ttext-align:center;\r\n\tline-height:.2rem;\r\n}\r\n.foot>ul li span i:nth-child(2){\r\n\tborder:0 none;\r\n\tmargin:0 .1rem;\r\n}\r\n.foot>ul li span input{\r\n\toutline:none;\r\n    width: 0.88rem;\r\n    outline: none;\r\n    text-align: center;\r\n    border: 0 none;\r\n    height: 0.358rem;\r\n    font-size: 0.2rem;\r\n    margin: 0.02rem 0;\r\n    background: #f8f8f8;\t\r\n}\r\n.foot ul li:nth-of-type(1){\r\n    font-size: 0.14rem;\r\n}\r\n.foot>div:nth-child(4){\r\n    position:relative;\r\n    padding: .1rem .3rem;\r\n    font-size: .22rem;\r\n    text-align: left;\r\n    line-height: 0.422rem;\r\n    height: 0.422rem;\r\n\tfont-size:.2rem;\r\n\tcolor:#f00;\r\n\tfont-weight:600;\r\n}\r\n.foot>div:nth-child(4) .add_foot{\r\n    font-weight: normal;\r\n    color: #333;\r\n    border: 0.01rem solid #e8e8e8;\r\n    padding: 0.06rem 0.1rem;\r\n    font-size: 0.166rem;\r\n    border-radius: 0.05rem;\r\n    background: #fafafa;   \r\n}\r\n.foot>div:nth-child(4) input{\r\n    display: inline-block;\r\n    font-size: 0.14rem;\r\n    width: 1.98rem;\r\n    height: 0.4rem;\r\n    -webkit-appearance: none;\r\n    background-color: #fff;\r\n    background-image: none;\r\n    border-radius: 0.04rem;\r\n    border: 1px solid #d8dce5;\r\n    box-sizing: border-box;\r\n    line-height: 1;\r\n    outline: none;\r\n    transition: border-color .2s cubic-bezier(.645,.045,.355,1);\r\n    background: #fafafa;\r\n    color: #555;\r\n    margin-left: 0.2rem;\r\n    padding-left: 0.1rem;\r\n}\r\n.foot>div:nth-child(4) ul{\r\n    margin-top: 0.02rem;\r\n    width: 1.96rem;\r\n    position: absolute;\r\n    box-sizing: border-box;\r\n    left: 1.18rem;\r\n    background: #fafafa;\r\n    border: 1px solid #d8dce5;\r\n    top: 0.56rem;\r\n    border-radius: 0.05rem 0.05rem 0 0;\r\n}\r\n.foot>div:nth-child(4) ul li{\r\n    padding-left: .1rem;\r\n    box-sizing: border-box;\r\n    width: 100%;\r\n    font-size: 0.14rem;\r\n    border-bottom: 0.01rem solid #fff;\r\n    height: 0.288rem;\r\n    line-height: 0.288rem;    \r\n}\r\n.foot>div:nth-child(4) ul li span{\r\n    font-size: 0.152rem;    \r\n}\r\n.foot>div:nth-child(4) ul li span:first-child{\r\n    color:#333;\r\n    font-weight:100;\r\n}\r\n.foot>div:nth-child(4) ul li span:last-child{\r\n    color:#333;\r\n    float:right;\r\n    margin-right:.1rem;\r\n    font-weight:100;\r\n    color:#f00;\r\n}\r\n.foot>div:nth-child(4) button{\r\n    position:absolute;\r\n    right:2.3rem;\r\n    border:0 none;\r\n    outline: none;\r\n    background: none;\r\n    font-size: .2rem;\r\n    line-height: .4rem;\r\n    color:#58bc58;\r\n}\r\n.foot>h5{\r\n    text-align: right;\r\n    background: #fafafa;\r\n    margin-top: 0.1rem;\r\n    font-size: 0.2rem;\r\n}\r\n.foot>h5 span{\r\n    color: #f33;\r\n    font-size: .26rem;\r\n    font-weight: 600;\r\n    padding: 0 1.22rem;\r\n}\r\n.foot>p:nth-child(6){\r\n    float: left;\r\n    padding-bottom: .4rem;\r\n}\r\n.foot>p:nth-child(6) span{\r\n    font-size: 0.126rem;\r\n    color: #666;\r\n    padding-left: 0.1rem;\r\n    font-style: italic;\r\n}\r\n\r\n.foot .start{\r\n\tbackground:#1075FF;\r\n    float: right;\r\n    font-size: .22rem;\r\n    padding: .08rem .2rem;\r\n    color: #fff;\r\n    outline: none;\r\n    border: 0 none;\r\n    margin-right: .3rem;\r\n    box-shadow: 0.04rem 0.04rem 0.08rem #333;\r\n    border-radius: 0.04rem;\r\n    margin-top: 0.2rem;    \r\n}\r\n.foot .over{\r\n\tbackground:#CD0000;\r\n}\r\n.foot .conf{\r\n\tleft:50%;\r\n\ttop:50%;\r\n\ttransform:translate(-50%,-50%);\r\n\tposition:fixed;\r\n\twidth:40%;\r\n\theight:24%;\r\n\tbackground:#f2f2f2;\r\n}\r\n.foot h4{\r\n\tcolor: #fe524e;\r\n    letter-spacing: .16rem;\r\n    font-size: .28rem;\r\n    text-align: center;\r\n    padding: .1rem 0;\r\n}\r\n.foot .conf div{\r\n\tmargin-top:.5rem;\r\n\tdisplay:flex;\r\n\tjustify-content:space-between;\r\n\tpadding:0 .3rem;\r\n}\r\n.foot .conf span{\r\n\tfont-size:.18rem;\r\n\tborder:1px solid #ccc;\r\n\tpadding:.14rem .26rem;\r\n\tfont-weight:600;\r\n    color:#fff;\r\n    font-weight:600;\r\n    border-radius: .08rem;\r\n}\r\n.foot .conf span:first-child{\r\n    background: #58bc58;\r\n}\r\n.foot .conf span:last-child{\r\n    background: #f00;\r\n}", ""]);
 
 // exports
 

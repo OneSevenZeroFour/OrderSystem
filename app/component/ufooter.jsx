@@ -33,16 +33,26 @@ class Ufooter extends React.Component{
         }
         this.change_bg = (e) => {
             var idx = e.target.dataset.idx;
-            if(idx==0||(idx==2&&this.state.haso))
+            if(idx==0||(idx==2&&this.state.haso)){
                 this.props.dispatch({type:"changebg",bg_num:idx});
-            this.setState(Object.assign({},this.state,{
-                bg_num:idx
-            }));
-            if(idx==1)
+                this.setState(Object.assign({},this.state,{
+                    bg_num:idx
+                }))
+            };
+            if(idx==1){
+                console.log(this)
+                this.setState(Object.assign({},this.state,{
+                    bg_num:idx
+                }))            
                 this.callServer();
                 this.cleared();
-            if(idx==3)
+            };
+            if(idx==3){
+                this.setState(Object.assign({},this.state,{
+                    bg_num:idx
+                }))                 
                 this.callPay();
+            };
         }
         this.callPay = () => {
             //来结帐啦
@@ -75,6 +85,7 @@ class Ufooter extends React.Component{
         this.callServer = () => {
             //呼叫服务员 每隔3秒 发送一次socket消息
             console.log('callServer');
+            this.refs.service.classList.add("call_server");
             this.timer = setInterval(()=>{
                 socket.emit('callServer',{id:window.localStorage.getItem("desk_num")});
                 console.log("emit callServer")

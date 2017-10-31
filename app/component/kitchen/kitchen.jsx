@@ -5,7 +5,7 @@ import "../../../css/kitchen.scss";
 import axios from "axios";
 import io from "socket.io-client";
 
-var socket = io("http://localhost:10002");
+var socket = io("http://10.3.132.65:10002");
 
 class Kitchen extends React.Component{
     constructor(props){
@@ -17,7 +17,7 @@ class Kitchen extends React.Component{
         this.loadKitchen = this.loadKitchen.bind(this);
     }  
     loadKitchen(self){
-        axios.get("http://localhost:10002/kitchen")
+        axios.get("http://10.3.132.65:10002/kitchen")
             .then(function(res){
                 console.log(res);
                 var curtab = 0;
